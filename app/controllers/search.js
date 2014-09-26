@@ -2,30 +2,17 @@ app.controller("SearchController", function($scope, $location) {
   var deckUrl = getParameterByName("deckUrl");
   if (deckUrl) {
     $scope.deckUrl = deckUrl;
-
-  	$scope.creatures = [
-  		{ name: "Aetherling" },
-  	  { name: "Jin-Gitaxias, Core Augur" },
-  	  { name: "Spellskite" }
-  	];
-
-  	$scope.nonCreatures = [
-  	  { name: "Counterspell" },
-  	 	{ name: "Hinder" },
-  	  { name: "Forbid" }
-  	];
-
-  	$scope.lands = [
-  		{ name: "Island" },
-  		{ name: "Mutavault" },
-  		{ name: "Command Tower"}
-  	];
-
-  	$scope.uniques = [
-  		{ name: "Cancel" },
-  		{ name: "Remand" },
-  		{ name: "Spell Crumple"}
-  	]
+    $scope.creatures = [];
+    $scope.nonCreatures = [];
+    $scope.lands = [];
+    $scope.uniques = [];
+    
+    for (var i = 0; i < 10; i++) {
+      $scope.creatures.push({ name: getRandomCardName(CREATURES) });
+      $scope.nonCreatures.push({ name: getRandomCardName(NON_CREATURES) });
+      $scope.lands.push({ name: getRandomCardName(LANDS) });
+      $scope.uniques.push({ name: getRandomCardName(UNIQUES) });
+    }
   }
   
   $scope.search = function() {
