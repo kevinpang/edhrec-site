@@ -2,8 +2,7 @@ var app = angular.module("app", ["ngRoute"]);
 
 app.config(function ($routeProvider) {
 	$routeProvider
-			.when("/", {})
-			.when("/suggestions",
+			.when("/",
 					{
 						controller: "SuggestionsController",
 						templateUrl: "app/templates/suggestions.html"
@@ -14,11 +13,8 @@ app.config(function ($routeProvider) {
 $(document).ready(function() {
   $("#search").submit(function() {
     var tappedout = $("#tappedout").val();
-    var reload = window.location.href.indexOf("suggestions") > 0;
     
-    window.location.href = "#/suggestions?tappedout=" + tappedout;
-    if (reload) {
-      window.location.reload();      
-    }
+    window.location.href = "#/?tappedout=" + tappedout;
+    window.location.reload();
   });
 });
