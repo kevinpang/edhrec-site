@@ -1,4 +1,13 @@
-app.controller("SuggestionsController", function($scope) {
+app.controller("SearchController", function($scope, $location) {
+	$scope.search = function() {
+	  var tappedout = $("#tappedout").val();
+	  $location.search("tappedout", tappedout);
+	}
+
+  if (getParameterByName("tappedout") == null) {
+    return;
+  }
+  
 	$scope.creatures = [
 		{ name: "Aetherling" },
 	  { name: "Jin-Gitaxias, Core Augur" },
