@@ -1,7 +1,8 @@
 <h1>Creatures</h1>
 <ul>
 	<li ng-repeat="creature in creatures">
-		<img ng-src="http://mtgimage.com/card/{{ creature.name }}.jpg">
+		<a ng-href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name={{ creature.name }}">{{ creature.name }}</a>
+		<img ng-src="http://gatherer.wizards.com/Handlers/Image.ashx?type=card&name={{ creature.name }}&.jpg">
   </li>
 </ul>
 
