@@ -1,0 +1,10 @@
+a.card img {
+  position: absolute;
+  display: none;
+  z-index: 99;
+}
+
+a.card:hover img {
+  display: inline;
+  margin-left: 10px;
+}
