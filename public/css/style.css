@@ -12,3 +12,7 @@ a.card:hover img {
 input.search {
   width: 500px;
 }
+
+#search {
+  margin-bottom: 20px;
+}
