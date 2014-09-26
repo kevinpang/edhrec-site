@@ -4,6 +4,6 @@ app.directive("card", function() {
     scope: {
       name: "@"
     },
-    templateUrl: "app/templates/card.html"
+    templateUrl: "app/directives/card.html"
   }
 });
