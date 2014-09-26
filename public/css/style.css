@@ -1,3 +1,23 @@
+#search {
+  margin-bottom: 20px;
+  vertical-align: top;
+}
+
+#search input {
+  width: 700px;
+  margin: 0 5px 0 0;
+}
+
+#search button {
+  height: 33px;
+  vertical-align: top;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
 a.card img {
   position: absolute;
   display: none;
@@ -7,17 +27,4 @@ a.card img {
 a.card:hover img {
   display: inline;
   margin-left: 10px;
-}
-
-input.search {
-  width: 500px;
-}
-
-#search {
-  margin-bottom: 20px;
-}
-
-ul {
-  list-style: none;
-  padding-left: 0;
 }

@@ -1,13 +1,13 @@
 <form id="search" ng-submit="search()">
-	<input id="deckUrl" type="text" class="title search" placeholder="Link to your deck" />
-	<input type="submit" value="Get suggestions" />
+	<input id="deckUrl" type="text" class="title" placeholder="Link to your deck" />
+	<button>Get Suggestions</button>
 </form>
 
 <div ng-show="deckUrl">
-	<h3>Recommendations for <a ng-href="{{ deckUrl }}">your deck</a></h3>
+	<h3>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use:</h3>
 	
 	<div class="span-6">
-		<h3>Creatures</h3>
+		<h4>Creatures</h4>
 		<ul>
 			<li ng-repeat="creature in creatures">
 				<card name="{{ creature.name }}" />
@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="span-6">
-		<h3>Non-creatures</h3>
+		<h4>Non-creatures</h4>
 		<ul>
 			<li ng-repeat="nonCreature in nonCreatures">
 				<card name="{{ nonCreature.name }}" />
@@ -25,7 +25,7 @@
 	</div>
 
 	<div class="span-6">
-		<h3>Lands</h3>
+		<h4>Lands</h4>
 		<ul>
 			<li ng-repeat="land in lands">
 				<card name="{{ land.name }}" />
@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="span-6 last">
-		<h3>Uniques</h3>
+		<h4>Unique in your deck</h4>
 		<ul>
 			<li ng-repeat="unique in uniques">
 				<card name="{{ unique.name }}" />
