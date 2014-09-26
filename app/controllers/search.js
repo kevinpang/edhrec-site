@@ -16,7 +16,7 @@ app.controller("SearchController", function($scope, $location) {
   }
   
   $scope.search = function() {
-	  var deckUrl = $("#deckUrl").val();
-	  $location.search("deckUrl", deckUrl);
+	  var query = $("#query").val();
+	  $location.search("deckUrl", query);
 	}
 });
