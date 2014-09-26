@@ -1,0 +1,27 @@
+<h1>Creatures</h1>
+<ul>
+	<li ng-repeat="creature in creatures">
+		<card name="{{ creature.name }}" />
+  </li>
+</ul>
+
+<h1>Non-creatures</h1>
+<ul>
+	<li ng-repeat="nonCreature in nonCreatures">
+		<card name="{{ nonCreature.name }}" />
+	</li>
+</ul>
+
+<h1>Lands</h1>
+<ul>
+	<li ng-repeat="land in lands">
+		<card name="{{ land.name }}" />
+	</li>
+</ul>
+
+<h1>Uniques</h1>
+<ul>
+	<li ng-repeat="unique in uniques">
+		<card name="{{ unique.name }}" />
+	</li>
+</ul>

@@ -4,12 +4,12 @@ app.config(function ($routeProvider) {
 	$routeProvider
 			.when("/",
 					{
-						templateUrl: "app/partials/main.html"
+						templateUrl: "app/templates/main.html"
 					})
 			.when("/suggestions/tappedout/:id",
 					{
 						controller: "SuggestionsController",
-						templateUrl: "app/partials/suggestions.html"
+						templateUrl: "app/templates/suggestions.html"
 					})
 		  .otherwise({ redirectTo: "/" });
 });
