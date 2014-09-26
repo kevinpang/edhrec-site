@@ -1,8 +1,8 @@
 app.controller("SuggestionsController", function($scope) {
 	$scope.creatures = [
 		{ name: "Aetherling" },
-	  { name: "Jin-Gitaxias" },
-	  { name: "Core Augur" }
+	  { name: "Jin-Gitaxias, Core Augur" },
+	  { name: "Spellskite" }
 	];
 	
 	$scope.nonCreatures = [
