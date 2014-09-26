@@ -8,3 +8,7 @@ a.card:hover img {
   display: inline;
   margin-left: 10px;
 }
+
+input.search {
+  width: 500px;
+}
