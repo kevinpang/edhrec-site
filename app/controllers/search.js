@@ -21,4 +21,12 @@ app.controller("SearchController", function($scope, $location) {
 	  var query = $("#query").val();
 	  $location.search("deckUrl", query);
 	}
+	
+	$scope.getCardUrl = function(name) {
+	  return "http://gatherer.wizards.com/Pages/Card/Details.aspx?name=" + name;
+	};
+	
+	$scope.getCardImage = function(name) {
+	  return "http://gatherer.wizards.com/Handlers/Image.ashx?name=" + name + "&type=card&.jpg";
+	};
 });
