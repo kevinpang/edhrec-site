@@ -35,21 +35,21 @@ li {
   margin: 0;
 }
 
-a.card img {
-  position: absolute;
-  display: none;
-  z-index: 99;
-}
-
-a.card:hover img {
-  display: inline;
-  margin-left: 10px;
-}
-
 #moreRecommendations {
   padding-top: 20px;
 }
 
 #moreRecommendations ul {
   padding-bottom: 300px;
+}
+
+#moreRecommendations card-anchor img {
+  position: absolute;
+  display: none;
+  z-index: 99;
+}
+
+#moreRecommendations card-anchor:hover img {
+  display: inline;
+  margin-left: 10px;
 }
