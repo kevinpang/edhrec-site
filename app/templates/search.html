@@ -3,7 +3,7 @@
 	<button>Get Recommendations!</button>
 </form>
 
-<div ng-show="deckUrl">
+<div id="results" ng-show="deckUrl">
 	<h4>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use:</h4>
 	<ul id="topTen">
 		<li ng-repeat="topTenCard in topTen" class="span-6 last">
