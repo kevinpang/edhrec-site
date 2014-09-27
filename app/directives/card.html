@@ -1,4 +1,4 @@
-<a class="card" ng-href="{{ getCardUrl(name) }}">
+<a class="card" ng-href="{{ getCardUrl(name) }}" title="{{ name }}">
 	{{ name }}
-	<img ng-src="{{ getCardImage(name) }}" />
+	<card-image name="{{ name }}" />
 </a>

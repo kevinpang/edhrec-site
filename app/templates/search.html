@@ -8,7 +8,7 @@
 	<ul id="topTen">
 		<li ng-repeat="topTenCard in topTen" class="span-6 last">
 			<a ng-href="{{ getCardUrl(topTenCard.name) }}" ng-attr-title="{{ topTenCard.name }}">
-				<img ng-src="{{ getCardImage(topTenCard.name) }}" />
+				<card-image name="{{ topTenCard.name }}" />
 			</a>
 	  </li>
 	</ul>
