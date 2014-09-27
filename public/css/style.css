@@ -21,6 +21,7 @@ ul {
 
 li {
   padding: 5px 0;
+  margin: 0;
 }
 
 a.card img {
@@ -32,4 +33,12 @@ a.card img {
 a.card:hover img {
   display: inline;
   margin-left: 10px;
+}
+
+#moreRecommendations {
+  padding-top: 20px;
+}
+
+#moreRecommendations ul {
+  padding-bottom: 300px;
 }

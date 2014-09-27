@@ -2,7 +2,7 @@ app.directive("card", function() {
   return {
     restrict: "E",
     scope: {
-      name: "@"
+      name: "@",
     },
     templateUrl: "app/directives/card.html"
   }

@@ -4,41 +4,51 @@
 </form>
 
 <div ng-show="deckUrl">
-	<p>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use:</p>
+	<h4>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use:</h4>
+	<ul id="topTen">
+		<li ng-repeat="topTenCard in topTen" class="span-6 last">
+			<a ng-href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name={{ topTenCard.name }}" ng-attr-title="{{ topTenCard.name }}">
+				<img ng-src="http://gatherer.wizards.com/Handlers/Image.ashx?name={{ topTenCard.name }}&type=card&.jpg" />
+			</a>
+	  </li>
+	</ul>
 	
-	<div class="span-6">
-		<b>Creatures</b>
-		<ul>
-			<li ng-repeat="creature in creatures">
-				<card name="{{ creature.name }}" />
-		  </li>
-		</ul>
-	</div>
+	<div id="moreRecommendations" class="clear">
+		<h4>More recommendations:</h4>
+		<div class="span-6">
+			<b>Creatures</b>
+			<ul>
+				<li ng-repeat="creature in creatures">
+					<card name="{{ creature.name }}" />
+			  </li>
+			</ul>
+		</div>
 
-	<div class="span-6">
-		<b>Non-creatures</b>
-		<ul>
-			<li ng-repeat="nonCreature in nonCreatures">
-				<card name="{{ nonCreature.name }}" />
-			</li>
-		</ul>
-	</div>
+		<div class="span-6">
+			<b>Non-creatures</b>
+			<ul>
+				<li ng-repeat="nonCreature in nonCreatures">
+					<card name="{{ nonCreature.name }}" />
+				</li>
+			</ul>
+		</div>
 
-	<div class="span-6">
-		<b>Lands</b>
-		<ul>
-			<li ng-repeat="land in lands">
-				<card name="{{ land.name }}" />
-			</li>
-		</ul>
-	</div>
+		<div class="span-6">
+			<b>Lands</b>
+			<ul>
+				<li ng-repeat="land in lands">
+					<card name="{{ land.name }}" />
+				</li>
+			</ul>
+		</div>
 
-	<div class="span-6 last">
-		<b>Unique in your deck</b>
-		<ul>
-			<li ng-repeat="unique in uniques">
-				<card name="{{ unique.name }}" />
-			</li>
-		</ul>
+		<div class="span-6 last">
+			<b>Unique in your deck</b>
+			<ul>
+				<li ng-repeat="unique in uniques">
+					<card name="{{ unique.name }}" />
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
