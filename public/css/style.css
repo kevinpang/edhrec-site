@@ -60,14 +60,11 @@ li {
   font-weight: bold;
 }
 
-#moreRecommendations ul {
-  padding-bottom: 300px;
-}
-
 #moreRecommendations card-anchor img {
   position: absolute;
   display: none;
   z-index: 99;
+  margin-top: -295px;
 }
 
 #moreRecommendations card-anchor:hover img {
