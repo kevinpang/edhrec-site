@@ -3,6 +3,14 @@ body {
   background-color: #eee;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .container {
   margin-top: 20px;
 }
