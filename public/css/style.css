@@ -3,6 +3,10 @@ body {
   background-color: #eee;
 }
 
+.container {
+  margin-top: 20px;
+}
+
 #search {
   margin-bottom: 25px;
 }
