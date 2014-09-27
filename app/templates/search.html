@@ -13,42 +13,12 @@
 	  </li>
 	</ul>
 	
-	<div id="moreRecommendations" class="clear">
+	<div class="clear"></div>
+	<div id="moreRecommendations">
 		<h4>More recommendations:</h4>
-		<div class="span-6">
-			<b>Creatures</b>
-			<ul>
-				<li ng-repeat="creature in creatures">
-					<card name="{{ creature.name }}" />
-			  </li>
-			</ul>
-		</div>
-
-		<div class="span-6">
-			<b>Non-creatures</b>
-			<ul>
-				<li ng-repeat="nonCreature in nonCreatures">
-					<card name="{{ nonCreature.name }}" />
-				</li>
-			</ul>
-		</div>
-
-		<div class="span-6">
-			<b>Lands</b>
-			<ul>
-				<li ng-repeat="land in lands">
-					<card name="{{ land.name }}" />
-				</li>
-			</ul>
-		</div>
-
-		<div class="span-6 last">
-			<b>Cuts</b>
-			<ul>
-				<li ng-repeat="cut in cuts">
-					<card name="{{ cut.name }}" />
-				</li>
-			</ul>
-		</div>
+		<recommendations title="Creatures" cards="creatures"></recommendations>
+		<recommendations title="Non-creatures" cards="nonCreatures"></recommendations>
+		<recommendations title="Lands" cards="lands"></recommendations>
+		<recommendations title="Cuts" cards="cuts"></recommendations>
 	</div>
 </div>
