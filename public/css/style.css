@@ -1,5 +1,6 @@
 body {
   font-size: 13px;
+  background-color: #eee;
 }
 
 #search {
@@ -22,7 +23,7 @@ body {
 
 #results {
   padding-top: 25px;
-  border-top: 1px #ddd solid;
+  border-top: 1px #aaa solid;
 }
 
 ul {
