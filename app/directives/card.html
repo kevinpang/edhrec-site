@@ -1,4 +1,4 @@
-<a class="card" ng-href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name={{ name }}">
+<a class="card" ng-href="{{ getCardUrl(name) }}">
 	{{ name }}
-	<img ng-src="http://gatherer.wizards.com/Handlers/Image.ashx?name={{ name }}&type=card&.jpg" />
+	<img ng-src="{{ getCardImage(name) }}" />
 </a>

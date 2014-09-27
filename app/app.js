@@ -138,7 +138,7 @@ var LANDS = [
   "City of Brass"
 ];
 
-var UNIQUES = [
+var CUTS = [
   "Tombfire",
   "Break Open",
   "Shelkin Brownie",

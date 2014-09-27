@@ -1,4 +1,4 @@
-app.controller("SearchController", function($scope, $location) {
+app.controller("SearchController", function($scope, $location, cardService) {
   var deckUrl = getParameterByName("deckUrl");
   if (deckUrl) {
     $scope.deckUrl = deckUrl;
@@ -6,14 +6,14 @@ app.controller("SearchController", function($scope, $location) {
     $scope.creatures = [];
     $scope.nonCreatures = [];
     $scope.lands = [];
-    $scope.uniques = [];
+    $scope.cuts = [];
     
     for (var i = 0; i < 10; i++) {
       $scope.topTen.push({ name: getRandomCardName(CREATURES) });
       $scope.creatures.push({ name: getRandomCardName(CREATURES) });
       $scope.nonCreatures.push({ name: getRandomCardName(NON_CREATURES) });
       $scope.lands.push({ name: getRandomCardName(LANDS) });
-      $scope.uniques.push({ name: getRandomCardName(UNIQUES) });
+      $scope.cuts.push({ name: getRandomCardName(CUTS) });
     }
   }
   
@@ -23,10 +23,10 @@ app.controller("SearchController", function($scope, $location) {
 	}
 	
 	$scope.getCardUrl = function(name) {
-	  return "http://gatherer.wizards.com/Pages/Card/Details.aspx?name=" + name;
+    return cardService.getCardUrl(name);
 	};
 	
 	$scope.getCardImage = function(name) {
-	  return "http://gatherer.wizards.com/Handlers/Image.ashx?name=" + name + "&type=card&.jpg";
+    return cardService.getCardImage(name);
 	};
 });
