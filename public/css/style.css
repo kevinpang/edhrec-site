@@ -1,16 +1,23 @@
+body {
+  font-size: 13px;
+}
+
 #search {
   margin-bottom: 20px;
   vertical-align: top;
 }
 
 #query {
-  width: 700px;
+  width: 680px;
   margin: 0 5px 0 0;
+  font-size: 13px;
+  padding: 10px 5px;
 }
 
 #search button {
-  height: 33px;
+  height: 38px;
   vertical-align: top;
+  font-size: 13px;
   font-weight: bold;
 }
 
