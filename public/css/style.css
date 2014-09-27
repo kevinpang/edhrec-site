@@ -36,12 +36,20 @@ ul {
 }
 
 li {
-  padding: 5px 0;
+  padding: 0 0 10px 0;
   margin: 0;
 }
 
 #moreRecommendations {
   padding-top: 20px;
+}
+
+#moreRecommendations .type {
+  border-bottom: 1px #aaa solid;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  display: block;
+  width: 80%;
 }
 
 #moreRecommendations ul {

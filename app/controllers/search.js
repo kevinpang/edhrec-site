@@ -1,20 +1,16 @@
-app.controller("SearchController", function($scope, $location, cardService) {
+app.controller("SearchController", function($scope, $location, cardService, recommendationService) {
+  var getParameterByName = function(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    var results = regex.exec(window.location.href);
+    return results == null || results[1] == "" ?
+        null : decodeURIComponent(results[1].replace(/\+/g, " "));
+  };
+
   var deckUrl = getParameterByName("deckUrl");
   if (deckUrl) {
     $scope.deckUrl = deckUrl;
-    $scope.topTen = [];
-    $scope.creatures = [];
-    $scope.nonCreatures = [];
-    $scope.lands = [];
-    $scope.cuts = [];
-    
-    for (var i = 0; i < 10; i++) {
-      $scope.topTen.push({ name: getRandomCardName(CREATURES) });
-      $scope.creatures.push({ name: getRandomCardName(CREATURES) });
-      $scope.nonCreatures.push({ name: getRandomCardName(NON_CREATURES) });
-      $scope.lands.push({ name: getRandomCardName(LANDS) });
-      $scope.cuts.push({ name: getRandomCardName(CUTS) });
-    }
+    $scope.recommendations = recommendationService.getRecommendations(deckUrl);
   }
   
   $scope.search = function() {
