@@ -58,6 +58,8 @@ li {
   margin-bottom: 10px;
   display: block;
   width: 80%;
+  color: #666;
+  font-weight: bold;
 }
 
 #moreRecommendations ul {
