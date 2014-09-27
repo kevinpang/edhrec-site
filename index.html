@@ -13,6 +13,7 @@
 		<div class="container">
 			<h1>edhrec</h1>
 			<h3>Recommendations for Magic: The Gathering EDH decks</h3>
+			<search-bar></search-bar>
 			<div ng-view=""></div>
 		</div>
 
@@ -23,9 +24,10 @@
 		<script src="app/app.js"></script>
 		<script src="app/services/cardService.js"></script>
 		<script src="app/services/recommendationService.js"></script>
+		<script src="app/directives/searchBar.js"></script>
 		<script src="app/directives/cardImage.js"></script>
 		<script src="app/directives/cardAnchor.js"></script>
-		<script src="app/directives/recommendations.js"></script>
-		<script src="app/controllers/search.js"></script>
+		<script src="app/directives/moreRecommendations.js"></script>
+		<script src="app/controllers/recommendationsController.js"></script>
 	</body>
 </html>
