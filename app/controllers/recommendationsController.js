@@ -2,6 +2,7 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
   var deckUrl = $location.search().deckUrl;
   if (deckUrl) {
     $scope.recommendations = recommendationService.getRecommendations(deckUrl);
+    $("#query").val(deckUrl);
   }
 
 	$scope.getCardUrl = function(name) {

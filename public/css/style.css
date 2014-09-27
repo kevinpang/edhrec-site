@@ -16,7 +16,9 @@ a:hover {
 }
 
 #search {
+  padding-bottom: 25px;
   margin-bottom: 25px;
+  border-bottom: 1px #aaa solid;
 }
 
 #query {
@@ -31,11 +33,6 @@ a:hover {
   vertical-align: top;
   font-size: 13px;
   font-weight: bold;
-}
-
-#results {
-  padding-top: 25px;
-  border-top: 1px #aaa solid;
 }
 
 ul {
