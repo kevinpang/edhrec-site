@@ -16,6 +16,15 @@ a:hover {
   margin-top: 20px;
 }
 
+h1 a {
+  color: #111;
+}
+
+h1 a:hover {
+  text-decoration: none;
+  color: #111;
+}
+
 #search {
   padding-bottom: 25px;
   margin-bottom: 25px;
