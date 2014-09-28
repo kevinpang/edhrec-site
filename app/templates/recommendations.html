@@ -2,6 +2,11 @@
   {{ error }}
 </p>
 
+<div id="loading" ng-show="loading">
+  <h4>Generating recommendations...</h4>
+  <img ng-src="public/images/loading.gif" />
+</div>
+
 <div id="results" ng-show="recommendations">
   <h4>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use</h4>
   <ul id="topTen" class="row">

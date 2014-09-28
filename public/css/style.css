@@ -83,3 +83,18 @@ li {
   display: inline;
   margin-left: 10px;
 }
+
+#loading {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#loading h4 {
+  text-align: center;
+}
+
+#loading img {
+  width: 220px;
+  display: block;
+  margin: 0 auto;
+}
