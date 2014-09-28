@@ -28,10 +28,9 @@ h4 {
   margin-bottom: 20px;
 }
 
-#search {
-  padding-bottom: 25px;
-  margin-bottom: 25px;
-  border-bottom: 1px #aaa solid;
+#topSeparator {
+  border-top: 1px solid #aaa;
+  margin: 25px 0 15px 0;
 }
 
 #query {
