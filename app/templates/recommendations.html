@@ -1,7 +1,7 @@
 <div id="results" ng-show="recommendations">
   <h4>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use</h4>
   <ul id="topTen" class="row">
-    <li ng-repeat="topTenCard in recommendations.topTen" class="col-md-3">
+    <li ng-repeat="topTenCard in recommendations.topTen" class="col-xs-12 col-md-3">
       <card-anchor name="{{ topTenCard.name }}" />
     </li>
   </ul>
