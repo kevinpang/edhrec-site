@@ -15,6 +15,7 @@ a:hover {
   background-color: #444;
   margin-bottom: 20px;
   color: white;
+  padding: 0;
 }
 
 #header h1 a {
