@@ -30,21 +30,18 @@ h4 {
 
 #topSeparator {
   border-top: 1px solid #aaa;
-  margin: 25px 0 15px 0;
+  margin-bottom: 15px;
 }
 
 #query {
-  width: 880px;
-  margin: 0 5px 0 0;
-  font-size: 13px;
+  margin: 0 10px 10px 0;
   padding: 10px 5px;
 }
 
 #search button {
   height: 42px;
   vertical-align: top;
-  font-size: 13px;
-  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 ul {
