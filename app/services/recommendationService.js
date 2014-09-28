@@ -1,22 +1,29 @@
-app.service("recommendationService", function() {
+app.service("recommendationService", function($http) {
   this.getRecommendations = function(deckUrl) {
-    var recommendations = {
-      topTen: [],
-      creatures: [],
-      nonCreatures: [],
-      lands: [],
-      cuts: []
-    };
-    
-    for (var i = 0; i < 10; i++) {
-      recommendations.topTen.push({ name: getRandomCardName(CREATURES) });
-      recommendations.creatures.push({ name: getRandomCardName(CREATURES) });
-      recommendations.nonCreatures.push({ name: getRandomCardName(NON_CREATURES) });
-      recommendations.lands.push({ name: getRandomCardName(LANDS) });
-      recommendations.cuts.push({ name: getRandomCardName(CUTS) });
-    }
-    
-    return recommendations;
+    // TODO: Placeholder XHR that will return hardcodd results. Replace once edhrec API is available.
+    return $http.post("http://jsonplaceholder.typicode.com/posts", {
+      title: 'foo',
+      body: 'bar',
+      userId: 1
+    }).then(function(result) {
+      var recommendations = {
+        topTen: [],
+        creatures: [],
+        nonCreatures: [],
+        lands: [],
+        cuts: []
+      };
+
+      for (var i = 0; i < 10; i++) {
+        recommendations.topTen.push({ name: getRandomCardName(CREATURES) });
+        recommendations.creatures.push({ name: getRandomCardName(CREATURES) });
+        recommendations.nonCreatures.push({ name: getRandomCardName(NON_CREATURES) });
+        recommendations.lands.push({ name: getRandomCardName(LANDS) });
+        recommendations.cuts.push({ name: getRandomCardName(CUTS) });
+      }
+
+      return recommendations;
+    });
   };
   
   // TODO: remove these constants once site is hooked up to API
