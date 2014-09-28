@@ -11,13 +11,19 @@ a:hover {
   text-decoration: underline;
 }
 
-h1 a {
-  color: #111;
+#header {
+  background-color: #444;
+  margin-bottom: 20px;
+  color: white;
 }
 
-h1 a:hover {
+#header h1 a {
+  color: white;
+}
+
+#header h1 a:hover {
   text-decoration: none;
-  color: #111;
+  color: white;
 }
 
 h3 {
@@ -26,11 +32,6 @@ h3 {
 
 h4 {
   margin-bottom: 20px;
-}
-
-#topSeparator {
-  border-top: 1px solid #aaa;
-  margin: 0 0 20px 0;
 }
 
 #query {
