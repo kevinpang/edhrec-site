@@ -2,7 +2,8 @@ app.directive("cardAnchor", function() {
   return {
     restrict: "E",
     scope: {
-      name: "@"
+      name: "@",
+      showText: "@"
     },
     templateUrl: "app/directives/cardAnchor.html",
     controller: function($scope, cardService) {

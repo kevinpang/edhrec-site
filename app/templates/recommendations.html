@@ -2,9 +2,7 @@
   <h4>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use</h4>
   <ul id="topTen">
     <li ng-repeat="topTenCard in recommendations.topTen" class="span-6 last">
-      <a ng-href="{{ getCardUrl(topTenCard.name) }}" ng-attr-title="{{ topTenCard.name }}">
-        <card-image name="{{ topTenCard.name }}" />
-      </a>
+      <card-anchor name="{{ topTenCard.name }}" />
     </li>
   </ul>
   
