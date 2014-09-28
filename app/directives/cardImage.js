@@ -8,7 +8,7 @@ app.directive("cardImage", function() {
     controller: function($scope, cardService) {
       $scope.getCardImage = function(name) {
         return cardService.getCardImage(name);
-    	};      
+      };      
     }
   }
 });

@@ -5,11 +5,11 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
     $scope.recommendations = recommendationService.getRecommendations(deckUrl);
   }
 
-	$scope.getCardUrl = function(name) {
+  $scope.getCardUrl = function(name) {
     return cardService.getCardUrl(name);
-	};
-	
-	$scope.getCardImage = function(name) {
+  };
+  
+  $scope.getCardImage = function(name) {
     return cardService.getCardImage(name);
-	};
+  };
 });

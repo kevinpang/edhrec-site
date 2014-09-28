@@ -1,43 +1,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html ng-app="app">
-	<head>
-		<title>edhrec - Recommendations for Magic: the Gathering EDH decks</title>
-		<link rel="stylesheet" href="public/css/blueprint/screen.css" type="text/css" media="screen, projection">
-		<link rel="stylesheet" href="public/css/blueprint/print.css" type="text/css" media="print">
-		<!--[if lt IE 8]>
-		  <link rel="stylesheet" href="public/css/blueprint/ie.css" type="text/css" media="screen, projection">
-		<![endif]-->
-		<link rel="stylesheet" href="public/css/style.css" type="text/css">
-	</head>
-	<body>
-		<div class="container">
-			<h1><a href="#">edhrec</a></h1>
-			<h3>Recommendations for Magic: The Gathering EDH decks</h3>
-			<search-bar></search-bar>
-			<div ng-view=""></div>
-		</div>
+  <head>
+    <title>edhrec - Recommendations for Magic: the Gathering EDH decks</title>
+    <link rel="stylesheet" href="public/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="public/css/blueprint/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="public/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="public/css/style.css" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+      <h1><a href="#">edhrec</a></h1>
+      <h3>Recommendations for Magic: The Gathering EDH decks</h3>
+      <search-bar></search-bar>
+      <div ng-view=""></div>
+    </div>
 
-		<script src="public/scripts/angular.js"></script>
-		<script src="public/scripts/angular-route.js"></script>
-		<script src="public/scripts/jquery-2.1.1.min.js"></script>
+    <script src="public/scripts/angular.js"></script>
+    <script src="public/scripts/angular-route.js"></script>
+    <script src="public/scripts/jquery-2.1.1.min.js"></script>
 
-		<script src="app/app.js"></script>
-		<script src="app/services/cardService.js"></script>
-		<script src="app/services/recommendationService.js"></script>
-		<script src="app/directives/searchBar.js"></script>
-		<script src="app/directives/cardImage.js"></script>
-		<script src="app/directives/cardAnchor.js"></script>
-		<script src="app/directives/moreRecommendations.js"></script>
-		<script src="app/controllers/recommendationsController.js"></script>
-		
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script src="app/app.js"></script>
+    <script src="app/services/cardService.js"></script>
+    <script src="app/services/recommendationService.js"></script>
+    <script src="app/directives/searchBar.js"></script>
+    <script src="app/directives/cardImage.js"></script>
+    <script src="app/directives/cardAnchor.js"></script>
+    <script src="app/directives/moreRecommendations.js"></script>
+    <script src="app/controllers/recommendationsController.js"></script>
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		  ga('create', 'UA-2756562-21', 'auto');
-		  ga('send', 'pageview');
-		</script>
-	</body>
+      ga('create', 'UA-2756562-21', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
 </html>
