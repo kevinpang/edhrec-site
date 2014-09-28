@@ -62,6 +62,10 @@ li {
   margin: 0;
 }
 
+#topTen img {
+  margin-bottom: 10px;
+}
+
 #moreRecommendations {
   padding-top: 20px;
 }
