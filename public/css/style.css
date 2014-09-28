@@ -1,5 +1,4 @@
 body {
-  font-size: 13px;
   background-color: #eee;
 }
 
@@ -25,6 +24,14 @@ h1 a:hover {
   color: #111;
 }
 
+h3 {
+  margin-bottom: 20px;
+}
+
+h4 {
+  margin-bottom: 20px;
+}
+
 #search {
   padding-bottom: 25px;
   margin-bottom: 25px;
@@ -32,14 +39,14 @@ h1 a:hover {
 }
 
 #query {
-  width: 670px;
+  width: 880px;
   margin: 0 5px 0 0;
   font-size: 13px;
   padding: 10px 5px;
 }
 
 #search button {
-  height: 38px;
+  height: 42px;
   vertical-align: top;
   font-size: 13px;
   font-weight: bold;

@@ -5,9 +5,6 @@ app.directive("moreRecommendations", function() {
       type: "@",
       cards: "="
     },
-    templateUrl: "app/directives/moreRecommendations.html",
-    link: function($scope, element, attributes) {
-      element.addClass("span-6 last");
-    }
+    templateUrl: "app/directives/moreRecommendations.html"
   }
 });

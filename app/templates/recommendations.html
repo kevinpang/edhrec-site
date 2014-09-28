@@ -1,16 +1,18 @@
 <div id="results" ng-show="recommendations">
   <h4>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use</h4>
-  <ul id="topTen">
-    <li ng-repeat="topTenCard in recommendations.topTen" class="span-6 last">
+  <ul id="topTen" class="row">
+    <li ng-repeat="topTenCard in recommendations.topTen" class="col-md-3">
       <card-anchor name="{{ topTenCard.name }}" />
     </li>
   </ul>
   
-  <div id="moreRecommendations" class="clear">
+  <div id="moreRecommendations">
     <h4>More recommendations</h4>
-    <more-recommendations type="Creatures" cards="recommendations.creatures"></more-recommendations>
-    <more-recommendations type="Non-creatures" cards="recommendations.nonCreatures"></more-recommendations>
-    <more-recommendations type="Lands" cards="recommendations.lands"></more-recommendations>
-    <more-recommendations type="Cuts" cards="recommendations.cuts"></more-recommendations>
+    <div class="row">
+      <more-recommendations type="Creatures" cards="recommendations.creatures"></more-recommendations>
+      <more-recommendations type="Non-creatures" cards="recommendations.nonCreatures"></more-recommendations>
+      <more-recommendations type="Lands" cards="recommendations.lands"></more-recommendations>
+      <more-recommendations type="Cuts" cards="recommendations.cuts"></more-recommendations>
+    </div>
   </div>
 </div>
