@@ -1,7 +1,22 @@
-app.service("recommendationService", function($http) {
+var TAPPED_OUT_HOSTNAME = "tappedout.net";
+
+app.service("recommendationService", function($http, $q) {
+  this.isValidDeckUrl = function(deckUrl) {
+    var parser = document.createElement("a");
+    parser.href = deckUrl;
+    return parser.hostname === TAPPED_OUT_HOSTNAME;
+  };
+  
   this.getRecommendations = function(deckUrl) {
+    var deferred = $q.defer();
+
+    if (!this.isValidDeckUrl(deckUrl)) {
+      deferred.reject("Invalid deck URL. Please enter in a TappedOut URL.");
+      return deferred.promise;
+    }
+    
     // TODO: Placeholder XHR that will return hardcodd results. Replace once edhrec API is available.
-    return $http.post("http://jsonplaceholder.typicode.com/posts", {
+    $http.post("http://jsonplaceholder.typicode.com/post", {
       title: 'foo',
       body: 'bar',
       userId: 1
@@ -22,8 +37,12 @@ app.service("recommendationService", function($http) {
         recommendations.cuts.push({ name: getRandomCardName(CUTS) });
       }
 
-      return recommendations;
+      deferred.resolve(recommendations);
+    }, function(error) {
+      deferred.reject("Error while generating recommendations. " + error.status + " - " + error.statusText + ".");
     });
+    
+    return deferred.promise;
   };
   
   // TODO: remove these constants once site is hooked up to API
