@@ -59,6 +59,10 @@ li {
   margin: 0;
 }
 
+#topTen {
+  padding-top: 10px;
+}
+
 #topTen img {
   margin-bottom: 10px;
 }
