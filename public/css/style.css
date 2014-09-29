@@ -85,7 +85,7 @@ li {
 }
 
 #loading {
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
 }
 
@@ -94,8 +94,6 @@ li {
   margin-bottom: 10px;
 }
 
-#loading img {
-  width: 220px;
-  display: block;
-  margin: 0 auto;
+#loading .progress-bar {
+  width: 100%;
 }

@@ -5,7 +5,9 @@
 
 <div id="loading" ng-show="loading">
   <h4>Generating recommendations...</h4>
-  <img ng-src="public/images/loading.gif" />
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped active"></div>
+  </div>
 </div>
 
 <div id="results" ng-show="recommendations">
