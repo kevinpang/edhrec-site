@@ -11,7 +11,7 @@ app.service("recommendationService", function($http, $q) {
     var deferred = $q.defer();
 
     if (!this.isValidDeckUrl(deckUrl)) {
-      deferred.reject("Invalid deck URL. Please enter in a TappedOut URL.");
+      deferred.reject("Invalid deck URL.");
       return deferred.promise;
     }
     
@@ -39,7 +39,7 @@ app.service("recommendationService", function($http, $q) {
 
       deferred.resolve(recommendations);
     }, function(error) {
-      deferred.reject("Error while generating recommendations. " + error.status + " - " + error.statusText + ".");
+      deferred.reject("Error generating recommendations: " + error.status + " - " + error.statusText + ".");
     });
     
     return deferred.promise;
