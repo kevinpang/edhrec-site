@@ -4,7 +4,7 @@ app.directive("searchBar", function() {
     scope: {
       name: "@"
     },
-    templateUrl: "app/directives/searchBar.html",
+    templateUrl: "app/templates/searchBar.html",
     controller: function($scope, $location) {
       $scope.search = function() {
         var query = $("#query").val();

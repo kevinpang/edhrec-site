@@ -5,6 +5,6 @@ app.directive("moreRecommendations", function() {
       type: "@",
       cards: "="
     },
-    templateUrl: "app/directives/moreRecommendations.html"
+    templateUrl: "app/templates/moreRecommendations.html"
   }
 });
