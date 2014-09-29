@@ -34,10 +34,6 @@ h3 {
   margin-bottom: 20px;
 }
 
-h4 {
-  margin-bottom: 20px;
-}
-
 #query {
   margin: 0 10px 10px 0;
   padding: 10px 5px;
@@ -47,6 +43,10 @@ h4 {
   height: 42px;
   vertical-align: top;
   margin-bottom: 25px;
+}
+
+.faq {
+  margin-bottom: 30px;
 }
 
 ul {
