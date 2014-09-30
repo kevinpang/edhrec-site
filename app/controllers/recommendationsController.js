@@ -3,10 +3,10 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
   $scope.loading = true;
   
   recommendationService.getRecommendations(deckUrl)
-      .then(function(data) {
+      .then(function(recommendations) {
         $scope.loading = false;
         $scope.deckUrl = deckUrl;
-        $scope.recommendations = data;
+        $scope.recommendations = recommendations;
       }).catch(function(errorMessage) {
         $scope.loading = false;
         $scope.error = errorMessage;
