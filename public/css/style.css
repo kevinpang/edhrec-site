@@ -2,6 +2,10 @@ body {
   background-color: #eee;
 }
 
+#main {
+  margin-bottom: 50px;
+}
+
 a {
   text-decoration: none;
   cursor: pointer;
