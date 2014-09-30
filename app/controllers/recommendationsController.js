@@ -1,5 +1,5 @@
 app.controller("RecommendationsController", function($scope, $location, cardService, recommendationService) {
-  var deckUrl = $location.search().deckUrl;
+  var deckUrl = $location.search().q;
   $scope.loading = true;
   
   recommendationService.getRecommendations(deckUrl)

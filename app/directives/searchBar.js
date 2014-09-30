@@ -8,7 +8,7 @@ app.directive("searchBar", function() {
     controller: function($scope, $location) {
       $scope.search = function() {
         var query = $("#query").val();
-        $location.path("/recommendations").search({ "deckUrl": query });
+        $location.path("/recommendations").search({ "q": query });
       }
       
       $("#query").focus();
