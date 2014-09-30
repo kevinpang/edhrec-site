@@ -30,19 +30,6 @@ app.service("recommendationService", function($http, $q) {
     return parser.hostname === TAPPED_OUT_HOSTNAME;
   };
   
-  // Sorts cards by score in descending order.
-  this.cardSortFunction_ = function(card1, card2) {
-    return card2.score - card1.score;
-  }
-  
-  this.isLand_ = function(card) {
-    return $.inArray(LAND_TYPE, card.card_info.types) > -1;
-  }
-  
-  this.isCreature_ = function(card) {
-    return $.inArray(CREATURE_TYPE, card.card_info.types) > -1;
-  }
-  
   this.parseResponse_ = function(data) {
     var recs = data.recs.sort(this.cardSortFunction_);
     var cuts = data.cuts; // Deliberately not sorting since most have the same score.    
@@ -76,5 +63,18 @@ app.service("recommendationService", function($http, $q) {
       lands: lands.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY),
       cuts: cuts.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY)
     };
+  }
+  
+  // Sorts cards by score in descending order.
+  this.cardSortFunction_ = function(card1, card2) {
+    return card2.score - card1.score;
+  }
+  
+  this.isLand_ = function(card) {
+    return $.inArray(LAND_TYPE, card.card_info.types) > -1;
+  }
+  
+  this.isCreature_ = function(card) {
+    return $.inArray(CREATURE_TYPE, card.card_info.types) > -1;
   }
 });
