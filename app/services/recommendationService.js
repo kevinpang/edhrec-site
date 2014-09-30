@@ -18,7 +18,11 @@ app.service("recommendationService", function($http, $q) {
     $http.get(url).then($.proxy(function(result) {    
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
-      deferred.reject("Error generating recommendations. Status code: " + error.status);
+      var message = "Error generating recommendations. Status code: " + error.status;
+      if (error.status == 500) {
+        message += ". Please verify your deck link is correct and that your deck isn't marked as private.";
+      }
+      deferred.reject(message);
     });
     
     return deferred.promise;
