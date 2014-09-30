@@ -7,6 +7,23 @@ var MAX_TOP_RECOMMENDATIONS = 12;
 var MAX_RECOMMENDATIONS_PER_CATEGORY = 15;
 
 app.service("recommendationService", function($http, $q) {
+  this.getRecommendations = function(deckUrl) {
+    var deferred = $q.defer();
+    if (!this.isValidDeckUrl_(deckUrl)) {
+      deferred.reject("Invalid deck URL.");
+      return deferred.promise;
+    }
+    
+    var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
+    $http.get(url).then($.proxy(function(result) {    
+      deferred.resolve(this.parseResponse_(result.data));
+    }, this), function(error) {
+      deferred.reject("Error generating recommendations. Status code: " + error.status);
+    });
+    
+    return deferred.promise;
+  };
+  
   this.isValidDeckUrl_ = function(deckUrl) {
     var parser = document.createElement("a");
     parser.href = deckUrl;
@@ -60,21 +77,4 @@ app.service("recommendationService", function($http, $q) {
       cuts: cuts.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY)
     };
   }
-  
-  this.getRecommendations = function(deckUrl) {
-    var deferred = $q.defer();
-    if (!this.isValidDeckUrl_(deckUrl)) {
-      deferred.reject("Invalid deck URL.");
-      return deferred.promise;
-    }
-    
-    var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
-    $http.get(url).then($.proxy(function(result) {    
-      deferred.resolve(this.parseResponse_(result.data));
-    }, this), function(error) {
-      deferred.reject("Error generating recommendations. Status code: " + error.status);
-    });
-    
-    return deferred.promise;
-  };
 });
