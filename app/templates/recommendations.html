@@ -19,14 +19,27 @@
   </ul>
   
   <h4>More recommendations</h4>
-  <div id="moreRecommendations" class="row js-masonry">
-    <more-recommendations type="Creatures" cards="recommendations.creatures"></more-recommendations>
-    <more-recommendations type="Artifacts" cards="recommendations.artifacts"></more-recommendations>
-    <more-recommendations type="Enchantments" cards="recommendations.enchantments"></more-recommendations>
-    <more-recommendations type="Instants" cards="recommendations.instants"></more-recommendations>
-    <more-recommendations type="Sorceries" cards="recommendations.sorceries"></more-recommendations>
-    <more-recommendations type="Planeswalkers" cards="recommendations.planeswalkers"></more-recommendations>
-    <more-recommendations type="Lands" cards="recommendations.lands"></more-recommendations>
-    <more-recommendations type="Unique to your deck" cards="recommendations.cuts"></more-recommendations>
+  <div id="moreRecommendations" class="row">
+    <div class="col-xs-12 col-md-9">
+      <div id="adds" class="row js-masonry">
+        <more-recommendations type="Creatures" cards="recommendations.creatures"
+            class="col-xs-12 col-md-4 section"></more-recommendations>
+        <more-recommendations type="Artifacts" cards="recommendations.artifacts"
+            class="col-xs-12 col-md-4 section"></more-recommendations>
+        <more-recommendations type="Enchantments" cards="recommendations.enchantments"
+            class="col-xs-12 col-md-4 section"></more-recommendations>
+        <more-recommendations type="Instants" cards="recommendations.instants"
+            class="col-xs-12 col-md-4 section"></more-recommendations>
+        <more-recommendations type="Sorceries" cards="recommendations.sorceries"
+            class="col-xs-12 col-md-4 section"></more-recommendations>
+        <more-recommendations type="Planeswalkers" cards="recommendations.planeswalkers"
+            class="col-xs-12 col-md-4 section"></more-recommendations>
+        <more-recommendations type="Lands" cards="recommendations.lands"
+            class="col-xs-12 col-md-4 section"></more-recommendations>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <more-recommendations type="Unique to your deck" cards="recommendations.cuts"></more-recommendations>
+    </div>
   </div>
 </div>

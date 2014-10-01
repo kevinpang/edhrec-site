@@ -8,7 +8,7 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
         $scope.deckUrl = deckUrl;
         $scope.recommendations = recommendations;
         
-        var moreRecommendations = $("#moreRecommendations");
+        var moreRecommendations = $("#moreRecommendations #adds");
         moreRecommendations.imagesLoaded(function() {
           moreRecommendations.masonry({
             itemSelector: ".section"
