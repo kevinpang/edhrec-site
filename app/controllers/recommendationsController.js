@@ -11,7 +11,7 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
         var moreRecommendations = $("#moreRecommendations #adds");
         moreRecommendations.imagesLoaded(function() {
           moreRecommendations.masonry({
-            itemSelector: ".section"
+            itemSelector: "more-recommendations"
           });
         });
       }).catch(function(errorMessage) {
