@@ -1,4 +1,5 @@
-app.controller("RecommendationsController", function($scope, $location, cardService, recommendationService) {
+app.controller("RecommendationsController", function(
+    $scope, $location, $timeout, cardService, recommendationService) {
   var deckUrl = $location.search().q;
   $scope.loading = true;
   
@@ -7,12 +8,14 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
         $scope.loading = false;
         $scope.deckUrl = deckUrl;
         $scope.recommendations = recommendations;
-        
-        var moreRecommendations = $("#moreRecommendations #adds");
-        moreRecommendations.imagesLoaded(function() {
+
+        // Don't run Masonry until the next digest cycle so that the
+        // sections have had a chance to render.
+        $timeout(function() {
+          var moreRecommendations = $("#moreRecommendations #adds");
           moreRecommendations.masonry({
             itemSelector: "more-recommendations"
-          });
+          });  
         });
       }).catch(function(errorMessage) {
         $scope.loading = false;
