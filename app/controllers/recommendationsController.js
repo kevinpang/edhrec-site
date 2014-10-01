@@ -7,6 +7,13 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
         $scope.loading = false;
         $scope.deckUrl = deckUrl;
         $scope.recommendations = recommendations;
+        
+        var container = $(".js-masonry");
+        container.imagesLoaded(function() {
+          container.masonry({
+            itemSelector: ".more"
+          });
+        });
       }).catch(function(errorMessage) {
         $scope.loading = false;
         $scope.error = errorMessage;

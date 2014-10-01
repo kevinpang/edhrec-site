@@ -3,8 +3,13 @@ var EDHREC_API_URL = "http://edhrec.com/rec";
 var API_REF = "kevin";
 var LAND_TYPE = "Land";
 var CREATURE_TYPE = "Creature";
+var ARTIFACT_TYPE = "Artifact";
+var ENCHANTMENT_TYPE = "Enchantment";
+var INSTANT_TYPE = "Instant";
+var SORCERY_TYPE = "Sorcery";
+var PLANESWALKER_TYPE = "Planeswalker";
 var MAX_TOP_RECOMMENDATIONS = 12;
-var MAX_RECOMMENDATIONS_PER_CATEGORY = 15;
+var MAX_RECOMMENDATIONS_PER_TYPE = 15;
 
 app.service("recommendationService", function($http, $q) {
   this.getRecommendations = function(deckUrl) {
@@ -35,45 +40,55 @@ app.service("recommendationService", function($http, $q) {
   };
   
   this.parseResponse_ = function(data) {
-    var recs = data.recs;
-    var cuts = data.cuts;
-    var top = [];
-    var creatures = [];
-    var nonCreatures = [];
-    var lands = [];
-    
-    for (var i = 0; i < recs.length; i++) {
-      var card = recs[i];
-      var land = this.isLand_(card);
-      var creature = this.isCreature_(card);
+    var recommendations = {
+      top: [],
+      creatures: [],
+      artifacts: [],
+      enchantments: [],
+      instants: [],
+      sorceries: [],
+      planeswalkers: [],
+      lands: [],
+      cuts: data.cuts
+    }
+
+    for (var i = 0; i < data.recs.length; i++) {
+      var card = data.recs[i];
+      var land = this.isType_(card, LAND_TYPE);
       
-      if (top.length < MAX_TOP_RECOMMENDATIONS && !land) {
-        top.push(card);
-      } else {
+      if (recommendations.top.length < MAX_TOP_RECOMMENDATIONS && !land) {
+        recommendations.top.push(card);
+      } else {      
         if (land) {
-          lands.push(card);
-        } else if (creature) {
-          creatures.push(card);
-        } else {
-          nonCreatures.push(card);
+          recommendations.lands.push(card);
+        } else if (this.isType_(card, CREATURE_TYPE)) {
+          recommendations.creatures.push(card);
+        } else if (this.isType_(card, ARTIFACT_TYPE)) {
+          recommendations.artifacts.push(card);
+        } else if (this.isType_(card, ENCHANTMENT_TYPE)) {
+          recommendations.enchantments.push(card);
+        } else if (this.isType_(card, INSTANT_TYPE)) {
+          recommendations.instants.push(card);
+        } else if (this.isType_(card, SORCERY_TYPE)) {
+          recommendations.sorceries.push(card);
+        } else if (this.isType_(card, PLANESWALKER_TYPE)) {
+          recommendations.planeswalkers.push(card);
         }
       }
     }
     
-    return {
-      top: top,
-      creatures: creatures.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY),
-      nonCreatures: nonCreatures.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY),
-      lands: lands.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY),
-      cuts: cuts.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY)
-    };
+    recommendations.creatures = recommendations.creatures.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.artifacts = recommendations.artifacts.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.enchantments = recommendations.enchantments.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.instants = recommendations.instants.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.sorceries = recommendations.sorceries.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.planeswalkers = recommendations.planeswalkers.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.lands = recommendations.lands.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.cuts = recommendations.cuts.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    return recommendations;
   }
   
-  this.isLand_ = function(card) {
-    return $.inArray(LAND_TYPE, card.card_info.types) > -1;
-  }
-  
-  this.isCreature_ = function(card) {
-    return $.inArray(CREATURE_TYPE, card.card_info.types) > -1;
+  this.isType_ = function(card, type) {
+    return $.inArray(type, card.card_info.types) > -1;
   }
 });
