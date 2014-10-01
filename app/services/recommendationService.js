@@ -35,8 +35,8 @@ app.service("recommendationService", function($http, $q) {
   };
   
   this.parseResponse_ = function(data) {
-    var recs = data.recs.sort(this.cardSortFunction_);
-    var cuts = data.cuts; // Deliberately not sorting since most have the same score.    
+    var recs = data.recs;
+    var cuts = data.cuts;
     var top = [];
     var creatures = [];
     var nonCreatures = [];
@@ -67,11 +67,6 @@ app.service("recommendationService", function($http, $q) {
       lands: lands.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY),
       cuts: cuts.slice(0, MAX_RECOMMENDATIONS_PER_CATEGORY)
     };
-  }
-  
-  // Sorts cards by score in descending order.
-  this.cardSortFunction_ = function(card1, card2) {
-    return card2.score - card1.score;
   }
   
   this.isLand_ = function(card) {
