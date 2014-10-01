@@ -8,10 +8,10 @@ app.controller("RecommendationsController", function($scope, $location, cardServ
         $scope.deckUrl = deckUrl;
         $scope.recommendations = recommendations;
         
-        var container = $(".js-masonry");
-        container.imagesLoaded(function() {
-          container.masonry({
-            itemSelector: ".more"
+        var moreRecommendations = $("#moreRecommendations");
+        moreRecommendations.imagesLoaded(function() {
+          moreRecommendations.masonry({
+            itemSelector: ".section"
           });
         });
       }).catch(function(errorMessage) {
