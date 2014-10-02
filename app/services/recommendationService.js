@@ -21,8 +21,10 @@ app.service("recommendationService", function($http, $q) {
     
     var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
     $http.get(url).then($.proxy(function(result) {    
+      ga("send", "event", "search", "success", deckUrl);
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
+      ga("send", "event", "search", "error", error.status, 1);
       var message = "Error generating recommendations. Status code: " + error.status;
       if (error.status == 500) {
         message += ". Please verify your deck link is correct and that your deck isn't marked as private.";
