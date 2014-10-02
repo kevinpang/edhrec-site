@@ -3,6 +3,10 @@ app.service("monitoringService", function() {
     ga("send", "event", "search", "success", null, 1);
   }
   
+  this.incrementSearchSampleDeckCount = function() {
+    ga("send", "event", "search", "success", "sample_deck", 1);
+  }
+  
   this.incrementSearchErrorCount = function(status) {
     ga("send", "event", "search", "error", status, 1);
   }

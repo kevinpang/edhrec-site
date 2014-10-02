@@ -10,7 +10,7 @@ var SORCERY_TYPE = "Sorcery";
 var PLANESWALKER_TYPE = "Planeswalker";
 var MAX_TOP_RECOMMENDATIONS = 12;
 var MAX_RECOMMENDATIONS_PER_TYPE = 15;
-var SAMPLE_RECOMMENDATIONS_URL = "/public/sample_recommendations.txt";
+var SAMPLE_RECOMMENDATIONS_URL = "public/sample_recommendations.txt";
 var SAMPLE_DECK_URL = "http://tappedout.net/mtg-decks/30-09-14-rhys-the-redeemed/";
 
 app.service("recommendationService", function($http, $q, monitoringService) {
@@ -21,17 +21,19 @@ app.service("recommendationService", function($http, $q, monitoringService) {
       deferred.reject("Invalid deck URL.");
       return deferred.promise;
     }
-    
-    var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
-    
+
     // Hardcoded response for sample deck, both to reduce load on backend and for
-    // local testing.
-    if (deckUrl == SAMPLE_DECK_URL) {
-      url = SAMPLE_RECOMMENDATIONS_URL;
-    }
+    // local testing.  
+    var sampleDeck = deckUrl == SAMPLE_DECK_URL;
+    var url = sampleDeck ? SAMPLE_RECOMMENDATIONS_URL
+        : EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
     
     $http.get(url).then($.proxy(function(result) {
-      monitoringService.incrementSearchSuccessCount();
+      if (sampleDeck) {
+        monitoringService.incrementSearchSampleDeckCount();
+      } else {
+        monitoringService.incrementSearchSuccessCount();
+      }
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
       monitoringService.incrementSearchErrorCount(error.status);
