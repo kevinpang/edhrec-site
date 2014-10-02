@@ -1,5 +1,5 @@
 app.controller("RecommendationsController", function(
-    $scope, $location, $timeout, $window, cardService, recommendationService) {
+    $scope, $location, $timeout, cardService, recommendationService) {
   var deckUrl = $location.search().q;
   $scope.loading = true;
   
@@ -29,8 +29,4 @@ app.controller("RecommendationsController", function(
   $scope.getCardImage = function(name) {
     return cardService.getCardImage(name);
   };
-  
-  $scope.$on('$viewContentLoaded', function(event) {
-    $window.ga('send', 'pageview', { page: $location.path() });
-  });
 });
