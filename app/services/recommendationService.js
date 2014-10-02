@@ -10,6 +10,8 @@ var SORCERY_TYPE = "Sorcery";
 var PLANESWALKER_TYPE = "Planeswalker";
 var MAX_TOP_RECOMMENDATIONS = 12;
 var MAX_RECOMMENDATIONS_PER_TYPE = 15;
+var SAMPLE_RECOMMENDATIONS_URL = "/public/sample_recommendations.txt";
+var SAMPLE_DECK_URL = "http://tappedout.net/mtg-decks/30-09-14-rhys-the-redeemed/";
 
 app.service("recommendationService", function($http, $q, monitoringService) {
   this.getRecommendations = function(deckUrl) {
@@ -21,6 +23,13 @@ app.service("recommendationService", function($http, $q, monitoringService) {
     }
     
     var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
+    
+    // Hardcoded response for sample deck, both to reduce load on backend and for
+    // local testing.
+    if (deckUrl == SAMPLE_DECK_URL) {
+      url = SAMPLE_RECOMMENDATIONS_URL;
+    }
+    
     $http.get(url).then($.proxy(function(result) {
       monitoringService.incrementSearchSuccessCount();
       deferred.resolve(this.parseResponse_(result.data));
