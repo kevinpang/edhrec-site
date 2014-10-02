@@ -21,7 +21,7 @@ app.service("recommendationService", function($http, $q) {
     
     var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
     $http.get(url).then($.proxy(function(result) {    
-      ga("send", "event", "search", "success", deckUrl);
+      ga("send", "event", "search", "success", null, 1);
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
       ga("send", "event", "search", "error", error.status, 1);
