@@ -1,6 +1,11 @@
 app.service("recommendationService", function($http, $q, monitoringService, types, settings) {
   this.getRecommendations = function(deckUrl) {
     var deferred = $q.defer();
+    
+    if (deckUrl.indexOf("http") < 0) {
+      deckUrl = "http://" + deckUrl;
+    }
+    
     if (!this.isValidDeckUrl_(deckUrl)) {
       monitoringService.incrementInvalidDeckUrlCount();
       deferred.reject("Invalid deck URL.");
