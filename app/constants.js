@@ -8,7 +8,7 @@ app.constant("settings", {
   SAMPLE_DECK_URL: "http://tappedout.net/mtg-decks/30-09-14-rhys-the-redeemed/"
 });
 
-app.constant("types", {
+app.constant("cardTypes", {
   CREATURE: "Creature",
   LAND: "Land",
   ARTIFACT: "Artifact",
@@ -17,3 +17,7 @@ app.constant("types", {
   SORCERY: "Sorcery",
   PLANESWALKER: "Planeswalker"
 });
+
+app.constant("searchTypes", {
+  TAPPED_OUT: "tapped_out"
+})

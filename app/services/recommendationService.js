@@ -1,4 +1,4 @@
-app.service("recommendationService", function($http, $q, monitoringService, types, settings) {
+app.service("recommendationService", function($http, $q, monitoringService, cardTypes, searchTypes, settings) {
   this.getRecommendations = function(deckUrl) {
     var deferred = $q.defer();
     
@@ -22,7 +22,7 @@ app.service("recommendationService", function($http, $q, monitoringService, type
       if (sampleDeck) {
         monitoringService.incrementSearchSampleDeckCount();
       } else {
-        monitoringService.incrementSearchSuccessCount();
+        monitoringService.incrementSearchSuccessCount(searchTypes.TAPPED_OUT);
       }
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
@@ -58,24 +58,24 @@ app.service("recommendationService", function($http, $q, monitoringService, type
 
     for (var i = 0; i < data.recs.length; i++) {
       var card = data.recs[i];
-      var land = this.isType_(card, types.LAND);
+      var land = this.isType_(card, cardTypes.LAND);
       
       if (recommendations.top.length < settings.MAX_TOP_RECOMMENDATIONS && !land) {
         recommendations.top.push(card);
       } else {      
         if (land) {
           recommendations.lands.push(card);
-        } else if (this.isType_(card, types.CREATURE)) {
+        } else if (this.isType_(card, cardTypes.CREATURE)) {
           recommendations.creatures.push(card);
-        } else if (this.isType_(card, types.ARTIFACT)) {
+        } else if (this.isType_(card, cardTypes.ARTIFACT)) {
           recommendations.artifacts.push(card);
-        } else if (this.isType_(card, types.ENCHANTMENT)) {
+        } else if (this.isType_(card, cardTypes.ENCHANTMENT)) {
           recommendations.enchantments.push(card);
-        } else if (this.isType_(card, types.INSTANT)) {
+        } else if (this.isType_(card, cardTypes.INSTANT)) {
           recommendations.instants.push(card);
-        } else if (this.isType_(card, types.SORCERY)) {
+        } else if (this.isType_(card, cardTypes.SORCERY)) {
           recommendations.sorceries.push(card);
-        } else if (this.isType_(card, types.PLANESWALKER)) {
+        } else if (this.isType_(card, cardTypes.PLANESWALKER)) {
           recommendations.planeswalkers.push(card);
         }
       }
