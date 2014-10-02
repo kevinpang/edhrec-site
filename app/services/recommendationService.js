@@ -15,12 +15,13 @@ app.service("recommendationService", function($http, $q, monitoringService) {
   this.getRecommendations = function(deckUrl) {
     var deferred = $q.defer();
     if (!this.isValidDeckUrl_(deckUrl)) {
+      monitoringService.incrementInvalidDeckUrlCount();
       deferred.reject("Invalid deck URL.");
       return deferred.promise;
     }
     
     var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
-    $http.get(url).then($.proxy(function(result) {    
+    $http.get(url).then($.proxy(function(result) {
       monitoringService.incrementSearchSuccessCount();
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
