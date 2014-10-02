@@ -5,7 +5,9 @@ app.directive("searchBar", function() {
       name: "@"
     },
     templateUrl: "app/templates/searchBar.html",
-    controller: function($scope, $location) {
+    controller: function($scope, $location, settings) {
+      $scope.sampleDeckUrl = settings.SAMPLE_DECK_URL;
+      
       $scope.search = function() {
         var query = $("#query").val();
         $location.path("/recommendations").search({ "q": query });

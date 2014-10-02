@@ -1,19 +1,4 @@
-var TAPPED_OUT_HOSTNAME = "tappedout.net";
-var EDHREC_API_URL = "http://edhrec.com/rec";
-var API_REF = "kevin";
-var LAND_TYPE = "Land";
-var CREATURE_TYPE = "Creature";
-var ARTIFACT_TYPE = "Artifact";
-var ENCHANTMENT_TYPE = "Enchantment";
-var INSTANT_TYPE = "Instant";
-var SORCERY_TYPE = "Sorcery";
-var PLANESWALKER_TYPE = "Planeswalker";
-var MAX_TOP_RECOMMENDATIONS = 12;
-var MAX_RECOMMENDATIONS_PER_TYPE = 15;
-var SAMPLE_RECOMMENDATIONS_URL = "public/sample_recommendations.txt";
-var SAMPLE_DECK_URL = "http://tappedout.net/mtg-decks/30-09-14-rhys-the-redeemed/";
-
-app.service("recommendationService", function($http, $q, monitoringService) {
+app.service("recommendationService", function($http, $q, monitoringService, types, settings) {
   this.getRecommendations = function(deckUrl) {
     var deferred = $q.defer();
     if (!this.isValidDeckUrl_(deckUrl)) {
@@ -24,9 +9,9 @@ app.service("recommendationService", function($http, $q, monitoringService) {
 
     // Hardcoded response for sample deck, both to reduce load on backend and for
     // local testing.  
-    var sampleDeck = deckUrl == SAMPLE_DECK_URL;
-    var url = sampleDeck ? SAMPLE_RECOMMENDATIONS_URL
-        : EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
+    var sampleDeck = deckUrl == settings.SAMPLE_DECK_URL;
+    var url = sampleDeck ? settings.SAMPLE_RECOMMENDATIONS_URL
+        : settings.EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + settings.API_REF;
     
     $http.get(url).then($.proxy(function(result) {
       if (sampleDeck) {
@@ -50,7 +35,7 @@ app.service("recommendationService", function($http, $q, monitoringService) {
   this.isValidDeckUrl_ = function(deckUrl) {
     var parser = document.createElement("a");
     parser.href = deckUrl;
-    return parser.hostname === TAPPED_OUT_HOSTNAME;
+    return parser.hostname === settings.TAPPED_OUT_HOSTNAME;
   };
   
   this.parseResponse_ = function(data) {
@@ -68,37 +53,37 @@ app.service("recommendationService", function($http, $q, monitoringService) {
 
     for (var i = 0; i < data.recs.length; i++) {
       var card = data.recs[i];
-      var land = this.isType_(card, LAND_TYPE);
+      var land = this.isType_(card, types.LAND);
       
-      if (recommendations.top.length < MAX_TOP_RECOMMENDATIONS && !land) {
+      if (recommendations.top.length < settings.MAX_TOP_RECOMMENDATIONS && !land) {
         recommendations.top.push(card);
       } else {      
         if (land) {
           recommendations.lands.push(card);
-        } else if (this.isType_(card, CREATURE_TYPE)) {
+        } else if (this.isType_(card, types.CREATURE)) {
           recommendations.creatures.push(card);
-        } else if (this.isType_(card, ARTIFACT_TYPE)) {
+        } else if (this.isType_(card, types.ARTIFACT)) {
           recommendations.artifacts.push(card);
-        } else if (this.isType_(card, ENCHANTMENT_TYPE)) {
+        } else if (this.isType_(card, types.ENCHANTMENT)) {
           recommendations.enchantments.push(card);
-        } else if (this.isType_(card, INSTANT_TYPE)) {
+        } else if (this.isType_(card, types.INSTANT)) {
           recommendations.instants.push(card);
-        } else if (this.isType_(card, SORCERY_TYPE)) {
+        } else if (this.isType_(card, types.SORCERY)) {
           recommendations.sorceries.push(card);
-        } else if (this.isType_(card, PLANESWALKER_TYPE)) {
+        } else if (this.isType_(card, types.PLANESWALKER)) {
           recommendations.planeswalkers.push(card);
         }
       }
     }
     
-    recommendations.creatures = recommendations.creatures.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.artifacts = recommendations.artifacts.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.enchantments = recommendations.enchantments.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.instants = recommendations.instants.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.sorceries = recommendations.sorceries.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.planeswalkers = recommendations.planeswalkers.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.lands = recommendations.lands.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.cuts = recommendations.cuts.slice(0, MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.creatures = recommendations.creatures.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.artifacts = recommendations.artifacts.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.enchantments = recommendations.enchantments.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.instants = recommendations.instants.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.sorceries = recommendations.sorceries.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.planeswalkers = recommendations.planeswalkers.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.lands = recommendations.lands.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.cuts = recommendations.cuts.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
     return recommendations;
   }
   
