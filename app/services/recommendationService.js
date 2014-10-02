@@ -11,7 +11,7 @@ var PLANESWALKER_TYPE = "Planeswalker";
 var MAX_TOP_RECOMMENDATIONS = 12;
 var MAX_RECOMMENDATIONS_PER_TYPE = 15;
 
-app.service("recommendationService", function($http, $q) {
+app.service("recommendationService", function($http, $q, monitoringService) {
   this.getRecommendations = function(deckUrl) {
     var deferred = $q.defer();
     if (!this.isValidDeckUrl_(deckUrl)) {
@@ -21,10 +21,10 @@ app.service("recommendationService", function($http, $q) {
     
     var url = EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + API_REF;
     $http.get(url).then($.proxy(function(result) {    
-      ga("send", "event", "search", "success", null, 1);
+      monitoringService.incrementSearchSuccessCount();
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
-      ga("send", "event", "search", "error", error.status, 1);
+      monitoringService.incrementSearchErrorCount(error.status);
       var message = "Error generating recommendations. Status code: " + error.status;
       if (error.status == 500) {
         message += ". Please verify your deck link is correct and that your deck isn't marked as private.";
