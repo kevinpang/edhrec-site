@@ -7,7 +7,7 @@ app.service("recommendationService", function($http, $q, monitoringService, card
     }
     
     if (!this.isValidDeckUrl_(deckUrl)) {
-      monitoringService.incrementInvalidDeckUrlCount();
+      monitoringService.incrementInvalidDeckUrlCount(deckUrl);
       deferred.reject("Invalid deck URL.");
       return deferred.promise;
     }
