@@ -40,7 +40,7 @@ app.service("recommendationService", function($http, $q, monitoringService, card
   this.isValidDeckUrl_ = function(deckUrl) {
     var parser = document.createElement("a");
     parser.href = deckUrl;
-    return parser.hostname === settings.TAPPED_OUT_HOSTNAME;
+    return settings.VALID_DECK_URL_HOSTNAMES.indexOf(parser.hostname) > -1;
   };
   
   this.parseResponse_ = function(data) {

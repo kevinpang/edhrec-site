@@ -1,5 +1,8 @@
 app.constant("settings", {
-  TAPPED_OUT_HOSTNAME: "tappedout.net",
+  VALID_DECK_URL_HOSTNAMES: [
+    "tappedout.net",
+    "next.tappedout.net"
+  ],
   EDHREC_API_URL: "http://edhrec.com/rec",
   API_REF: "kevin",
   MAX_TOP_RECOMMENDATIONS: 12,
