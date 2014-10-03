@@ -71,6 +71,22 @@ li {
   margin-bottom: 10px;
 }
 
+#top card-image {
+  display: block;
+}
+
+#top div {
+  text-align: center;
+  /* Matches card img width */
+  width: 223px;
+}
+
+#top a {
+  margin-bottom: 20px;
+  /* Need !important to get around autocardanywhere CSS */
+  display: block !important;
+}
+
 #moreRecommendations .type {
   border-bottom: 1px #aaa solid;
   padding-bottom: 10px;

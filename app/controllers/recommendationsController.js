@@ -16,7 +16,7 @@ app.controller("RecommendationsController", function(
           moreRecommendations.masonry({
             itemSelector: "more-recommendations"
           });  
-        });
+        }, 1000);
       }).catch(function(errorMessage) {
         $scope.loading = false;
         $scope.error = errorMessage;
