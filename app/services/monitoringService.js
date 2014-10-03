@@ -12,6 +12,6 @@ app.service("monitoringService", function() {
   }
   
   this.incrementInvalidDeckUrlCount = function(url) {
-    ga("send", "event", "invalid_deck_url", url, "", 1);
+    ga("send", "event", "search", "invalid_deck_url", url, 1);
   }
 });
