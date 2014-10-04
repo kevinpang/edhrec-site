@@ -5,6 +5,10 @@ app.controller("RecommendationsController", function(
   
   recommendationService.getRecommendations(deckUrl)
       .then(function(recommendations) {
+        if (deckUrl.indexOf("http") < 0) {
+          deckUrl = "http://" + deckUrl;
+        }
+        
         $scope.loading = false;
         $scope.deckUrl = deckUrl;
         $scope.recommendations = recommendations;
