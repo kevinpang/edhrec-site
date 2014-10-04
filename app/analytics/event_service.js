@@ -1,4 +1,4 @@
-app.service("monitoringService", function() {
+app.service("eventService", function() {
   this.incrementSearchSuccessCount = function(type) {
     ga("send", "event", "search", "success", type, 1);
   };

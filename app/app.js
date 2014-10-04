@@ -1,10 +1,10 @@
 var app = angular.module("app", ["ngRoute"]);
 
 app.config(function($provide) {
-  $provide.decorator("$exceptionHandler", function($delegate, monitoringService) {
+  $provide.decorator("$exceptionHandler", function($delegate, eventService) {
     return function(exception, cause) {
       $delegate(exception, cause);
-      monitoringService.incrementExceptionCount(exception.name, exception.message);
+      eventService.incrementExceptionCount(exception.name, exception.message);
     };
   });
 });

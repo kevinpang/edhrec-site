@@ -1,5 +1,5 @@
 app.service("recommendationService", function(
-    $http, $q, monitoringService, cardTypes, searchTypes, settings) {
+    $http, $q, eventService, cardTypes, searchTypes, settings) {
   this.getRecommendations = function(deckUrl) {
     var deferred = $q.defer();
     
@@ -9,7 +9,7 @@ app.service("recommendationService", function(
     }
     
     if (!this.isValidDeckUrl_(deckUrl)) {
-      monitoringService.incrementInvalidDeckUrlCount(originalDeckUrl);
+      eventService.incrementInvalidDeckUrlCount(originalDeckUrl);
       deferred.reject("Invalid deck link. Please enter in a valid TappedOut link to your deck (e.g. " +
           settings.SAMPLE_DECK_URL + ")");
       return deferred.promise;
@@ -23,13 +23,13 @@ app.service("recommendationService", function(
     
     $http.get(url).then($.proxy(function(result) {
       if (sampleDeck) {
-        monitoringService.incrementSearchSampleDeckCount();
+        eventService.incrementSearchSampleDeckCount();
       } else {
-        monitoringService.incrementSearchSuccessCount(searchTypes.TAPPED_OUT);
+        eventService.incrementSearchSuccessCount(searchTypes.TAPPED_OUT);
       }
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
-      monitoringService.incrementSearchErrorCount(error.status);
+      eventService.incrementSearchErrorCount(error.status);
       var message = "Error generating recommendations. Status code: " + error.status;
       if (error.status == 500) {
         message += ". Please verify your deck link is correct and that your deck isn't marked as private.";
