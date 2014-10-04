@@ -4,7 +4,7 @@ app.directive("searchBar", function() {
     scope: {
       name: "@"
     },
-    templateUrl: "app/templates/searchBar.html",
+    templateUrl: "app/search_bar/search_bar.html",
     controller: function($scope, $location, settings) {
       $scope.sampleDeckUrl = settings.SAMPLE_DECK_URL;
       

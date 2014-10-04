@@ -4,7 +4,7 @@ app.directive("cardAnchor", function() {
     scope: {
       name: "@"
     },
-    templateUrl: "app/templates/cardAnchor.html",
+    templateUrl: "app/card_anchor/card_anchor.html",
     controller: function($scope, cardService) {
       $scope.getCardUrl = function(name) {
         return cardService.getCardUrl(name);
