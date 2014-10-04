@@ -1,5 +1,14 @@
 var app = angular.module("app", ["ngRoute"]);
 
+app.config(function($provide) {
+  $provide.decorator("$exceptionHandler", function($delegate, monitoringService) {
+    return function(exception, cause) {
+      $delegate(exception, cause);
+      monitoringService.incrementExceptionCount(exception.name, exception.message);
+    };
+  });
+});
+
 app.config(function ($routeProvider) {
   $routeProvider
       .when("/", {
