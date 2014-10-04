@@ -1,4 +1,5 @@
-app.service("recommendationService", function($http, $q, monitoringService, cardTypes, searchTypes, settings) {
+app.service("recommendationService", function(
+    $http, $q, monitoringService, cardTypes, searchTypes, settings) {
   this.getRecommendations = function(deckUrl) {
     var deferred = $q.defer();
     
@@ -9,7 +10,8 @@ app.service("recommendationService", function($http, $q, monitoringService, card
     
     if (!this.isValidDeckUrl_(deckUrl)) {
       monitoringService.incrementInvalidDeckUrlCount(originalDeckUrl);
-      deferred.reject("Invalid deck URL.");
+      deferred.reject("Invalid deck link. Please enter in a valid TappedOut link to your deck (e.g. " +
+          settings.SAMPLE_DECK_URL + ")");
       return deferred.promise;
     }
 
