@@ -1,5 +1,5 @@
 app.controller("RecommendationsController", function(
-    $scope, $location, $timeout, cardService, recommendationService, pageViewService) {
+    $scope, $location, $timeout, cardService, recommendationService) {
   var deckUrl = $location.search().q;
   $scope.loading = true;
   

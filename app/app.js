@@ -1,4 +1,10 @@
-var app = angular.module("app", ["ngRoute"]);
+angular.module('pageView', []).run(function($rootScope, $window, $location) {
+  $rootScope.$on('$viewContentLoaded', function() {
+    $window.ga('send', 'pageview', { page: $location.path() });
+  });
+})
+
+var app = angular.module("app", ["ngRoute", "pageView"]);
 
 app.config(function($provide) {
   $provide.decorator("$exceptionHandler", function($delegate, eventService) {
