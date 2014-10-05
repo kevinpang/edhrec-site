@@ -43,7 +43,12 @@ app.service("recommendationService", function(
   this.isValidDeckUrl_ = function(deckUrl) {
     var parser = document.createElement("a");
     parser.href = deckUrl;
-    return settings.VALID_DECK_URL_HOSTNAMES.indexOf(parser.hostname) > -1;
+    for (var i = 0; i < settings.VALID_DECK_URL_HOSTNAMES.length; i++) {
+      if (parser.hostname.indexOf(settings.VALID_DECK_URL_HOSTNAMES[i]) > -1) {
+        return true;
+      }
+    }
+    return false
   };
   
   this.parseResponse_ = function(data) {

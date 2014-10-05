@@ -1,7 +1,6 @@
 app.constant("settings", {
   VALID_DECK_URL_HOSTNAMES: [
-    "tappedout.net",
-    "next.tappedout.net"
+    "tappedout.net"
   ],
   EDHREC_API_URL: "http://edhrec.com/rec",
   API_REF: "kevin",
