@@ -15,9 +15,7 @@
   <ul id="top" class="row">
     <li ng-repeat="top in recommendations.top" class="col-xs-12 col-md-3">
       <card-image name="{{ top.card_info.name }}"></card-image>
-      <div>
-        <a ng-href="{{ getCardUrl(top.card_info.name) }}">{{ top.card_info.name }}</a>
-      </div>
+      <card-anchor name="{{ top.card_info.name }}"></card-anchor>
     </li>
   </ul>
   

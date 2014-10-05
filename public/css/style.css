@@ -75,7 +75,8 @@ li {
   display: block;
 }
 
-#top div {
+#top card-anchor {
+  display: block;
   text-align: center;
   /* Matches card img width */
   width: 223px;
@@ -95,14 +96,14 @@ li {
   display: block;
 }
 
-#moreRecommendations card-anchor img {
+#moreRecommendations card-anchor + card-image {
   position: absolute;
   display: none;
   z-index: 99;
   margin-top: -295px;
 }
 
-#moreRecommendations card-anchor:hover img {
+#moreRecommendations card-anchor:hover + card-image {
   display: inline;
   margin-left: 10px;
 }
