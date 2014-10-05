@@ -1,6 +1,6 @@
 app.service("eventService", function() {
-  this.incrementSearchSuccessCount = function(type) {
-    ga("send", "event", "search", "success", type, 1);
+  this.incrementSearchSuccessCount = function(type, latency) {
+    ga("send", "event", "search", "success", type, latency);
   };
   
   this.incrementSearchSampleDeckCount = function() {
@@ -17,9 +17,5 @@ app.service("eventService", function() {
   
   this.incrementExceptionCount = function(name, message) {
     ga("send", "event", "exception", name, message, 1);
-  };
-  
-  this.recordSearchLatency = function(latency) {
-    ga("send", "event", "latency", "search", "", latency);
   };
 });

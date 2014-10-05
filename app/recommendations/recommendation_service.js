@@ -27,8 +27,7 @@ app.service("recommendationService", function(
         eventService.incrementSearchSampleDeckCount();
       } else {
         var latency = (new Date()).getTime() - start;
-        eventService.recordSearchLatency(latency);
-        eventService.incrementSearchSuccessCount(searchTypes.TAPPED_OUT);
+        eventService.incrementSearchSuccessCount(searchTypes.TAPPED_OUT, latency);
       }
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
