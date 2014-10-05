@@ -4,7 +4,7 @@ app.directive("cardImage", function() {
     scope: {
       name: "@"
     },
-    templateUrl: "app/card_image/card_image.html",
+    templateUrl: "app/card/card_image.html",
     controller: function($scope, cardService) {
       $scope.getCardImage = function(name) {
         return cardService.getCardImage(name);

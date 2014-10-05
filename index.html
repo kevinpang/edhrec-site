@@ -14,6 +14,8 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-2756562-21', 'auto');
+      enableAnalytics = window.location.hostname.indexOf("edhrec.com") > -1 ||
+          window.location.hostname.indexOf("kevinwilliampang.com") > -1;
     </script>
   </head>
   <body>
@@ -31,19 +33,22 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
     <script src="public/js/masonry.min.js"></script>
-    <script src="app/app.js?v=2"></script>
+    
+    <script src="app/app.js?v=3"></script>
     <script src="app/shared/constants.js?v=1"></script>
-    <script src="app/search_bar/search_bar_directive.js?v=2"></script>
-    <script src="app/home/home_controller.js?v=1"></script>
-    <script src="app/card_image/card_image_directive.js?v=1"></script>
-    <script src="app/card_anchor/card_anchor_directive.js?v=1"></script>
-    <script src="app/shared/card_service.js?v=1"></script>
+    
+    <script src="app/analytics/event_service.js?v=4"></script>
+    <script src="app/card/card_service.js?v=1"></script>
     <script src="app/recommendations/recommendation_service.js?v=3"></script>
+    
+    <script src="app/search_bar/search_bar_directive.js?v=2"></script>
+    <script src="app/card/card_image_directive.js?v=1"></script>
+    <script src="app/card/card_anchor_directive.js?v=1"></script>
     <script src="app/recommendations/more_recommendations_directive.js?v=1"></script>
+    
+    <script src="app/home/home_controller.js?v=1"></script>
     <script src="app/recommendations/recommendations_controller.js?v=1"></script>
-    <script src="app/analytics/event_service.js?v=3"></script>
     
     <script>
       // Include the UserVoice JavaScript SDK (only needed once on a page)

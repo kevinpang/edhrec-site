@@ -1,7 +1,6 @@
 angular.module('pageView', []).run(function($rootScope, $window, $location) {
   $rootScope.$on('$viewContentLoaded', function() {
-    if ($window.location.hostname.indexOf("edhrec.com") > -1 ||
-        $window.location.hostname.indexOf("kevinwilliampang.com") > -1) {
+    if ($window.enableAnalytics) {
       $window.ga('send', 'pageview', { page: $location.path() });
     } else {
       $window.console.log("Skipped recording pageview. Location: " + $location.path());        

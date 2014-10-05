@@ -1,6 +1,4 @@
 app.service("eventService", function($window) {
-  this.enabled_ = $window.location.hostname.indexOf("edhrec.com") > -1 ||
-      $window.location.hostname.indexOf("kevinwilliampang.com") > -1;
   this.window = $window;
 
   this.incrementSearchSuccessCount = function(type, latency) {
@@ -24,7 +22,7 @@ app.service("eventService", function($window) {
   };
   
   this.logEvent_ = function(category, action, label, value) {
-    if (this.enabled_) {
+    if (this.window.enableAnalytics) {
       this.window.ga("send", "event", category, action, label, value);      
     } else {
       this.window.console.log("Skipped recording event. Category: " + category +
