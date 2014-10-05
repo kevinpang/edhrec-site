@@ -1,7 +1,12 @@
 angular.module('pageView', []).run(function($rootScope, $window, $location) {
-  $rootScope.$on('$viewContentLoaded', function() {
-    $window.ga('send', 'pageview', { page: $location.path() });
-  });
+  if ($window.location.hostname.indexOf("edhrec.com") > -1 ||
+      $window.location.hostname.indexOf("kevinwilliampang.com") > -1) {
+    $rootScope.$on('$viewContentLoaded', function() {
+      $window.ga('send', 'pageview', { page: $location.path() });
+    });
+  } else {
+    $window.console.log("Skipped recording pageview. Location: " + $location.path());
+  }
 })
 
 var app = angular.module("app", ["ngRoute", "pageView"]);
