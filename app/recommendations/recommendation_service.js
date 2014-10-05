@@ -32,10 +32,11 @@ app.service("recommendationService", function(
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
       eventService.incrementSearchErrorCount(error.status);
-      var message = "Error generating recommendations. Status code: " + error.status;
+      var message = "Error generating recommendations.";
       if (error.status == 500) {
-        message += ". Please verify your deck link is correct and that your deck isn't marked as private.";
+        message += " Please verify your deck isn't marked as private and that your deck link is correct.";
       }
+      message += " Status code: " + error.status;
       deferred.reject(message);
     });
     
