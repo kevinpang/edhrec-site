@@ -20,11 +20,14 @@ app.service("recommendationService", function(
     var sampleDeck = deckUrl == settings.SAMPLE_DECK_URL;
     var url = sampleDeck ? settings.SAMPLE_RECOMMENDATIONS_URL
         : settings.EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + settings.API_REF;
+    var start = (new Date()).getTime();
     
     $http.get(url).then($.proxy(function(result) {
       if (sampleDeck) {
         eventService.incrementSearchSampleDeckCount();
       } else {
+        var latency = (new Date()).getTime() - start;
+        eventService.recordSearchLatency(latency);
         eventService.incrementSearchSuccessCount(searchTypes.TAPPED_OUT);
       }
       deferred.resolve(this.parseResponse_(result.data));

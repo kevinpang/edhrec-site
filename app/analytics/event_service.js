@@ -18,4 +18,8 @@ app.service("eventService", function() {
   this.incrementExceptionCount = function(name, message) {
     ga("send", "event", "exception", name, message, 1);
   };
+  
+  this.recordSearchLatency = function(latency) {
+    ga("send", "event", "latency", "search", "", latency);
+  };
 });
