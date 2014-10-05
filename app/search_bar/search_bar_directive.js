@@ -10,7 +10,9 @@ app.directive("searchBar", function() {
       
       $scope.search = function() {
         var query = $("#query").val();
-        $location.path("/recommendations").search({ "q": query });
+        if (query.trim().length > 0) {
+          $location.path("/recommendations").search({ "q": query });
+        }
       }
       
       $("#query").focus();
