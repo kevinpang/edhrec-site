@@ -9,7 +9,7 @@ app.service("recommendationService", function(
     }
     
     if (!this.isValidDeckUrl_(deckUrl)) {
-      eventService.incrementInvalidDeckUrlCount(originalDeckUrl);
+      eventService.recordSearchError("", originalDeckUrl);
       deferred.reject("Invalid deck link. Please enter in a valid TappedOut link to your deck (e.g. " +
           settings.SAMPLE_DECK_URL + ")");
       return deferred.promise;
@@ -18,20 +18,19 @@ app.service("recommendationService", function(
     // Hardcoded response for sample deck, both to reduce load on backend and for
     // local testing.  
     var sampleDeck = deckUrl == settings.SAMPLE_DECK_URL;
+    var searchType = sampleDeck ? searchTypes.SAMPLE_DECK : searchTypes.TAPPED_OUT;
     var url = sampleDeck ? settings.SAMPLE_RECOMMENDATIONS_URL
         : settings.EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + settings.API_REF;
     var start = (new Date()).getTime();
     
     $http.get(url).then($.proxy(function(result) {
-      if (sampleDeck) {
-        eventService.incrementSearchSampleDeckCount();
-      } else {
-        var latency = (new Date()).getTime() - start;
-        eventService.incrementSearchSuccessCount(searchTypes.TAPPED_OUT, latency);
-      }
+      var latency = (new Date()).getTime() - start;
+      eventService.recordSearchEvent(searchType, result.status, latency);
       deferred.resolve(this.parseResponse_(result.data));
     }, this), function(error) {
-      eventService.incrementSearchErrorCount(error.status);
+      var latency = (new Date()).getTime() - start;
+      eventService.recordSearchEvent(searchType, error.status, latency);
+      eventService.recordSearchError(error.status, originalDeckUrl);
       var message = "Error generating recommendations.";
       if (error.status == 500) {
         message += " Please verify your deck isn't marked as private and that your deck link is correct.";
@@ -64,7 +63,7 @@ app.service("recommendationService", function(
       sorceries: [],
       planeswalkers: [],
       lands: [],
-      cuts: data.cuts
+      cuts: data.cuts || []
     }
 
     for (var i = 0; i < data.recs.length; i++) {

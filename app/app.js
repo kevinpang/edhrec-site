@@ -14,7 +14,7 @@ app.config(function($provide) {
   $provide.decorator("$exceptionHandler", function($delegate, eventService) {
     return function(exception, cause) {
       $delegate(exception, cause);
-      eventService.incrementExceptionCount(exception.name, exception.message);
+      eventService.recordException(exception.name, exception.message);
     };
   });
 });

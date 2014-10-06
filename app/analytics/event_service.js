@@ -1,27 +1,19 @@
 app.service("eventService", function($window) {
   this.window = $window;
 
-  this.incrementSearchSuccessCount = function(type, latency) {
-    this.logEvent_("search", "success", type, latency);
+  this.recordSearchEvent = function(type, responseCode, latency) {
+    this.recordEvent_("search", type, responseCode, latency);
   };
   
-  this.incrementSearchSampleDeckCount = function() {
-    this.logEvent_("search", "success", "sample_deck", 1);
+  this.recordSearchError = function(statusCode, query) {
+    this.recordEvent_("search_error", statusCode, query);
+  }
+    
+  this.recordException = function(name, message) {
+    this.recordEvent_("exception", name, message, 1);
   };
   
-  this.incrementSearchErrorCount = function(status) {
-    this.logEvent_("search", "error", status, 1); 
-  };
-  
-  this.incrementInvalidDeckUrlCount = function(url) {
-    this.logEvent_("search", "invalid_deck_url", url, 1);
-  };
-  
-  this.incrementExceptionCount = function(name, message) {
-    this.logEvent_("exception", name, message, 1);
-  };
-  
-  this.logEvent_ = function(category, action, label, value) {
+  this.recordEvent_ = function(category, action, label, value) {
     if (this.window.enableAnalytics) {
       this.window.ga("send", "event", category, action, label, value);      
     } else {

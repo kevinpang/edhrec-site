@@ -21,5 +21,6 @@ app.constant("cardTypes", {
 });
 
 app.constant("searchTypes", {
-  TAPPED_OUT: "tapped_out"
+  TAPPED_OUT: "tapped_out",
+  SAMPLE_DECK: "sample_deck"
 })
