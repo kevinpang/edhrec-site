@@ -15,7 +15,6 @@ app.directive("searchBar", function() {
       $http.get("public/commanders.txt").then(function(result) {
         $("#query").autocomplete({
           source: result.data.split("\n"),
-          minLength: 2,
           select: function(event, ui) {
             $("#search_button").click();
           }
