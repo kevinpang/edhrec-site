@@ -115,6 +115,9 @@ app.service("recommendationService", function($http, $q, eventService, settings)
   }
   
   this.isType_ = function(card, type) {
+    if (card == null || card.card_info == null) {
+      return false;
+    }
     return $.inArray(type, card.card_info.types) > -1;
   }
 });
