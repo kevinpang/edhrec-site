@@ -1,1 +1,2 @@
-<img ng-src="{{ getCardImage(name) }}" title="{{ name }}" />
+<img ng-src="{{ lazy ? 'public/img/card_back.jpeg' : getCardImage(name) }}"
+   lazy-src="{{ lazy ? getCardImage(name) : '' }}" title="{{ name }}" />

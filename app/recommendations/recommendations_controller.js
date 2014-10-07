@@ -13,7 +13,7 @@ app.controller("RecommendationsController", function(
           $scope.loading = false;
           $scope.deckUrl = query;
           $scope.recommendations = recommendations;
-          this.runMasonry_();
+          this.updateMoreRecommendationsUi_();
         }, this)).catch(function(errorMessage) {
           $scope.loading = false;
           $scope.error = errorMessage;
@@ -24,21 +24,28 @@ app.controller("RecommendationsController", function(
           $scope.loading = false;
           $scope.commander = query;
           $scope.recommendations = recommendations;
-          this.runMasonry_();
+          this.updateMoreRecommendationsUi_();
         }, this)).catch(function(errorMessage) {
           $scope.loading = false;
           $scope.error = errorMessage;
         });
   }
   
-  this.runMasonry_ = function() {
-    // Don't run Masonry until the next digest cycle so that the
+  // Optimizes "More recommendations" layout and sets up hover handlers.
+  this.updateMoreRecommendationsUi_ = function() {
+    // Don't run post processing until the next digest cycle so that the
     // sections have had a chance to render.
     $timeout(function() {
       var moreRecommendations = $("#moreRecommendations #adds");
       moreRecommendations.masonry({
         itemSelector: "more-recommendations"
-      });  
+      });
+      
+      $("#moreRecommendations card-anchor").mouseenter(function() {
+        window.console.log("mouseenter");
+        var img = $(this).next().find("img");
+        img.attr("src", img.attr("lazy-src"));
+      });
     }, 1000);
   }
 });
