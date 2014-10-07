@@ -3,6 +3,7 @@ app.directive("searchBar", function() {
     restrict: "E",
     templateUrl: "app/search_bar/search_bar.html",
     controller: function($scope, $location, $http, settings) {
+      $scope.sampleCommander = settings.SAMPLE_COMMANDER;
       $scope.sampleDeckUrl = settings.SAMPLE_DECK_URL;
       
       $scope.search = function() {

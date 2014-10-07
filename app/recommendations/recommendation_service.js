@@ -7,6 +7,7 @@ var API_REF = "kevin";
 
 var searchTypes = {
   COMMANDER: "commander",
+  SAMPLE_COMMANDER: "sample_commander",
   SAMPLE_DECK: "sample_deck",
   TAPPED_OUT: "tapped_out"
 };
@@ -44,9 +45,11 @@ app.service("recommendationService", function($http, $q, eventService, settings)
   };
 
   this.getCommanderRecommendations = function(commander) {
+    var sampleCommander = commander == settings.SAMPLE_COMMANDER;
+    var searchType = sampleCommander ? searchTypes.SAMPLE_COMMANDER : searchTypes.COMMANDER;
     var url = COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
         
-    return this.getRecommendations_(commander, searchTypes.COMMANDER, url)
+    return this.getRecommendations_(commander, searchType, url)
         .then($.proxy(function(data) {
           return this.parseResponse_(data);
         }, this), function(error) {
