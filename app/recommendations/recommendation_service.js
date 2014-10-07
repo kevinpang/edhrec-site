@@ -1,57 +1,73 @@
-app.service("recommendationService", function(
-    $http, $q, eventService, cardTypes, searchTypes, settings) {
-  this.getRecommendations = function(deckUrl) {
-    var deferred = $q.defer();
-    
-    var originalDeckUrl = deckUrl;
-    if (deckUrl.indexOf("http") < 0) {
-      deckUrl = "http://" + deckUrl;
-    }
-    
-    if (!this.isValidDeckUrl_(deckUrl)) {
-      eventService.recordSearchError("", originalDeckUrl);
-      deferred.reject("Invalid deck link. Please enter in a valid TappedOut link to your deck (e.g. " +
-          settings.SAMPLE_DECK_URL + ")");
-      return deferred.promise;
-    }
+var MAX_TOP_RECS = 12;
+var MAX_CUTS = 15;
+var SAMPLE_DECK_RECOMMENDATIONS_URL = "public/sample_deck_recommendations.txt";
+var TAPPED_OUT_RECOMMENDATIONS_URL = "http://edhrec.com/rec";
+var COMMANDER_RECOMMENDATIONS_URL = "http://edhrec.com/cmdr";
+var API_REF = "kevin";
 
-    // Hardcoded response for sample deck, both to reduce load on backend and for
-    // local testing.  
+var searchTypes = {
+  COMMANDER: "commander",
+  SAMPLE_DECK: "sample_deck",
+  TAPPED_OUT: "tapped_out"
+};
+
+var cardTypes = {
+  CREATURE: "Creature",
+  LAND: "Land",
+  ARTIFACT: "Artifact",
+  ENCHANTMENT: "Enchantment",
+  INSTANT: "Instant",
+  SORCERY: "Sorcery",
+  PLANESWALKER: "Planeswalker"
+};
+
+app.service("recommendationService", function($http, $q, eventService, settings) {    
+  this.getDeckRecommendations = function(deckUrl) {
+    // Hardcoded response for sample deck to reduce load on backend
     var sampleDeck = deckUrl == settings.SAMPLE_DECK_URL;
     var searchType = sampleDeck ? searchTypes.SAMPLE_DECK : searchTypes.TAPPED_OUT;
-    var url = sampleDeck ? settings.SAMPLE_RECOMMENDATIONS_URL
-        : settings.EDHREC_API_URL + "?to=" + deckUrl + "&ref=" + settings.API_REF;
-    var start = (new Date()).getTime();
-    
-    $http.get(url).then($.proxy(function(result) {
-      var latency = (new Date()).getTime() - start;
-      eventService.recordSearchEvent(searchType, result.status, latency);
-      deferred.resolve(this.parseResponse_(result.data));
-    }, this), function(error) {
-      var latency = (new Date()).getTime() - start;
-      eventService.recordSearchEvent(searchType, error.status, latency);
-      eventService.recordSearchError(error.status, originalDeckUrl);
-      var message = "Error generating recommendations.";
-      if (error.status == 500) {
-        message += " Please verify your deck isn't marked as private and that your deck link is correct.";
-      }
-      message += " Status code: " + error.status;
-      deferred.reject(message);
-    });
-    
-    return deferred.promise;
+    var url = sampleDeck ? SAMPLE_DECK_RECOMMENDATIONS_URL
+        : TAPPED_OUT_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
+        
+    return this.getRecommendations_(deckUrl, searchType, url)
+        .then($.proxy(function(data) {
+          return this.parseResponse_(data);
+        }, this), function(error) {
+          var message = "Error generating recommendations.";
+          if (error.status == 500) {
+            message += " Please verify your deck isn't marked as private "
+                + " and that your deck link is correct.";
+          }
+          message += " Status code: " + error.status;
+          return $q.reject(message);
+        });
+  };
+
+  this.getCommanderRecommendations = function(commander) {
+    var url = COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
+        
+    return this.getRecommendations_(commander, searchTypes.COMMANDER, url)
+        .then($.proxy(function(data) {
+          return this.parseResponse_(data);
+        }, this), function(error) {
+          return $q.reject("Error generating recommendations. Please verify you typed " +
+              "in a valid commander or deck link. Status code: " + error.status);
+        });
   };
   
-  this.isValidDeckUrl_ = function(deckUrl) {
-    var parser = document.createElement("a");
-    parser.href = deckUrl;
-    for (var i = 0; i < settings.VALID_DECK_URL_HOSTNAMES.length; i++) {
-      if (parser.hostname.indexOf(settings.VALID_DECK_URL_HOSTNAMES[i]) > -1) {
-        return true;
-      }
-    }
-    return false
-  };
+  this.getRecommendations_ = function(query, searchType, url) {
+    var start = (new Date()).getTime();
+    
+    return $http.get(url).then($.proxy(function(result) {
+      var latency = (new Date()).getTime() - start;
+      eventService.recordSearchEvent(query, searchType, result.status, latency);
+      return result.data;
+    }, this), function(error) {
+      var latency = (new Date()).getTime() - start;
+      eventService.recordSearchEvent(query, searchType, error.status, latency);
+      return $q.reject(error);
+    });
+  }
   
   this.parseResponse_ = function(data) {
     var recommendations = {
@@ -70,7 +86,7 @@ app.service("recommendationService", function(
       var card = data.recs[i];
       var land = this.isType_(card, cardTypes.LAND);
       
-      if (recommendations.top.length < settings.MAX_TOP_RECOMMENDATIONS && !land) {
+      if (recommendations.top.length < MAX_TOP_RECS && !land) {
         recommendations.top.push(card);
       } else {      
         if (land) {
@@ -91,14 +107,7 @@ app.service("recommendationService", function(
       }
     }
     
-    recommendations.creatures = recommendations.creatures.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.artifacts = recommendations.artifacts.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.enchantments = recommendations.enchantments.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.instants = recommendations.instants.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.sorceries = recommendations.sorceries.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.planeswalkers = recommendations.planeswalkers.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.lands = recommendations.lands.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
-    recommendations.cuts = recommendations.cuts.slice(0, settings.MAX_RECOMMENDATIONS_PER_TYPE);
+    recommendations.cuts = recommendations.cuts.slice(0, MAX_CUTS);
     return recommendations;
   }
   

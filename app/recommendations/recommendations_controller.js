@@ -1,36 +1,44 @@
 app.controller("RecommendationsController", function(
-    $scope, $location, $timeout, cardService, recommendationService) {
-  var deckUrl = $location.search().q;
+    $scope, $location, $timeout, recommendationService) {
   $scope.loading = true;
+  var query = $location.search().q;  
   
-  recommendationService.getRecommendations(deckUrl)
-      .then(function(recommendations) {
-        if (deckUrl.indexOf("http") < 0) {
-          deckUrl = "http://" + deckUrl;
-        }
-        
-        $scope.loading = false;
-        $scope.deckUrl = deckUrl;
-        $scope.recommendations = recommendations;
-
-        // Don't run Masonry until the next digest cycle so that the
-        // sections have had a chance to render.
-        $timeout(function() {
-          var moreRecommendations = $("#moreRecommendations #adds");
-          moreRecommendations.masonry({
-            itemSelector: "more-recommendations"
-          });  
-        }, 1000);
-      }).catch(function(errorMessage) {
-        $scope.loading = false;
-        $scope.error = errorMessage;
-      });
-
-  $scope.getCardUrl = function(name) {
-    return cardService.getCardUrl(name);
-  };
+  if (query.toLowerCase().indexOf("tappedout") > -1) {
+    if (query.indexOf("http") < 0) {
+      query = "http://" + query;
+    }
+    
+    recommendationService.getDeckRecommendations(query)
+        .then($.proxy(function(recommendations) {
+          $scope.loading = false;
+          $scope.deckUrl = query;
+          $scope.recommendations = recommendations;
+          this.runMasonry_();
+        }, this)).catch(function(errorMessage) {
+          $scope.loading = false;
+          $scope.error = errorMessage;
+        });
+  } else {
+    recommendationService.getCommanderRecommendations(query)
+        .then($.proxy(function(recommendations) {
+          $scope.loading = false;
+          $scope.commander = query;
+          $scope.recommendations = recommendations;
+          this.runMasonry_();
+        }, this)).catch(function(errorMessage) {
+          $scope.loading = false;
+          $scope.error = errorMessage;
+        });
+  }
   
-  $scope.getCardImage = function(name) {
-    return cardService.getCardImage(name);
-  };
+  this.runMasonry_ = function() {
+    // Don't run Masonry until the next digest cycle so that the
+    // sections have had a chance to render.
+    $timeout(function() {
+      var moreRecommendations = $("#moreRecommendations #adds");
+      moreRecommendations.masonry({
+        itemSelector: "more-recommendations"
+      });  
+    }, 1000);
+  }
 });

@@ -11,7 +11,8 @@
 </div>
 
 <div id="recommendations" ng-show="recommendations">
-  <h4>Other decks like <a ng-href="{{ deckUrl }}">yours</a> use</h4>
+  <h4 ng-show="deckUrl">Other decks like <a ng-href="{{ deckUrl }}">yours</a> use</h4>
+  <h4 ng-show="commander">Top recommendations for <card-anchor name="{{ commander }}"></card-anchor></h4>
   <ul id="top" class="row">
     <li ng-repeat="top in recommendations.top" class="col-xs-12 col-md-3">
       <card-image name="{{ top.card_info.name }}"></card-image>
