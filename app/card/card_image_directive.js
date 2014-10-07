@@ -2,7 +2,8 @@ app.directive("cardImage", function() {
   return {
     restrict: "E",
     scope: {
-      name: "@"
+      name: "@",
+      lazy: "@"
     },
     templateUrl: "app/card/card_image.html",
     controller: function($scope, cardService) {
