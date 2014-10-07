@@ -17,6 +17,7 @@ app.directive("searchBar", function() {
         $("#query").autocomplete({
           source: result.data.split("\n"),
           select: function(event, ui) {
+            $("#query").val(ui.item.value);
             $("#search_button").click();
           }
         });  
