@@ -2,7 +2,7 @@ app.service("eventService", function($window) {
   this.recordSearchEvent = function(query, type, status, latency) {
     this.recordEvent_("search", type, status, latency);
     if (status != "200") {
-      this.recordEvent_("search_error", status, query);
+      this.recordEvent_("search_error", type, query);
     }
   };
       
