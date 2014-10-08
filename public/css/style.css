@@ -1,9 +1,9 @@
+html,
 body {
   background-color: #eee;
-}
-
-#main {
-  margin-bottom: 50px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 a {
@@ -13,6 +13,11 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+#wrapper {
+  min-height: 100%;
+  position: relative;
 }
 
 #header {
@@ -32,6 +37,22 @@ a:hover {
 
 #header h3 {
   color: white;
+}
+
+#main {
+  /* Height of footer */
+  padding-bottom: 270px;
+}
+
+#footer {
+  width: 100%;
+  height: 270px;
+  position: absolute;
+  background-color: #ddd;
+  bottom: 0;
+  left: 0;
+  margin-top: 0;
+  padding-top: 20px;
 }
 
 h3 {
@@ -102,14 +123,16 @@ li {
   display: block;
 }
 
-#moreRecommendations card-anchor + card-image {
+#moreRecommendations card-anchor + card-image,
+#recent_decks card-anchor + card-image {
   position: absolute;
   display: none;
   z-index: 99;
   margin-top: -295px;
 }
 
-#moreRecommendations card-anchor:hover + card-image {
+#moreRecommendations card-anchor:hover + card-image,
+#recent_decks card-anchor:hover + card-image {
   display: inline;
   margin-left: 10px;
 }
@@ -126,4 +149,12 @@ li {
 
 #loading .progress-bar {
   width: 100%;
+}
+
+#footer h4 {
+  margin-bottom: 20px;
+}
+
+#footer ul {
+  margin-bottom: 0;
 }

@@ -4,7 +4,7 @@
     <title>edhrec - Recommendations for Magic: the Gathering EDH decks</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-    <link rel="stylesheet" href="public/css/style.css?v=12" type="text/css">
+    <link rel="stylesheet" href="public/css/style.css?v=13" type="text/css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -20,15 +20,23 @@
     </script>
   </head>
   <body>
-    <div id="header" class="container-fluid">
-      <div class="container">
-        <h1><a href="#">edhrec</a></h1>
-        <h3>Recommendations for Magic: The Gathering EDH decks</h3>
-        <search-bar></search-bar>
+    <div id="wrapper">
+      <div id="header" class="container-fluid">
+        <div class="container">
+          <h1><a href="#">edhrec</a></h1>
+          <h3>Recommendations for Magic: The Gathering EDH decks</h3>
+          <search-bar></search-bar>
+        </div>
       </div>
-    </div>
-    <div id="main" class="container">
-      <div ng-view=""></div>
+      <div id="main" class="container">
+        <div ng-view=""></div>
+      </div>
+      <div id="footer">
+        <div class="container">
+          <h4>Recently analyzed decks</h4>
+          <recent-decks></recent-decks>
+        </div>
+      </div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
@@ -38,19 +46,21 @@
     <script src="public/js/masonry.min.js"></script>
     
     <script src="app/app.js?v=5"></script>
-    <script src="app/shared/constants.js?v=12"></script>
+    <script src="app/shared/constants.js?v=13"></script>
     
-    <script src="app/analytics/event_service.js?v=12"></script>
-    <script src="app/card/card_service.js?v=12"></script>
-    <script src="app/recommendations/recommendation_service.js?v=12"></script>
+    <script src="app/analytics/event_service.js?v=13"></script>
+    <script src="app/card/card_service.js?v=13"></script>
+    <script src="app/recommendations/recommendation_service.js?v=13"></script>
+    <script src="app/recent_decks/recent_decks_service.js?v=13"></script>
     
-    <script src="app/search_bar/search_bar_directive.js?v=12"></script>
-    <script src="app/card/card_image_directive.js?v=12"></script>
-    <script src="app/card/card_anchor_directive.js?v=12"></script>
-    <script src="app/recommendations/more_recommendations_directive.js?v=12"></script>
+    <script src="app/search_bar/search_bar_directive.js?v=13"></script>
+    <script src="app/card/card_image_directive.js?v=13"></script>
+    <script src="app/card/card_anchor_directive.js?v=13"></script>
+    <script src="app/recommendations/more_recommendations_directive.js?v=13"></script>
+    <script src="app/recent_decks/recent_decks_directive.js?v=13"></script>
     
-    <script src="app/home/home_controller.js?v=12"></script>
-    <script src="app/recommendations/recommendations_controller.js?v=12"></script>
+    <script src="app/home/home_controller.js?v=13"></script>
+    <script src="app/recommendations/recommendations_controller.js?v=13"></script>
     
     <script>
       // Include the UserVoice JavaScript SDK (only needed once on a page)
