@@ -28,10 +28,12 @@
           <search-bar></search-bar>
         </div>
       </div>
-      <div id="main" class="container">
-        <div ng-view=""></div>
+      <div id="main" class="container-fluid">
+        <div class="container">
+          <div ng-view=""></div>
+        </div>
       </div>
-      <div id="footer">
+      <div id="footer" class="container-fluid">
         <div class="container">
           <h4>Recently analyzed decks</h4>
           <recent-decks></recent-decks>
