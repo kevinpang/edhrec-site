@@ -1,6 +1,6 @@
 <ul id="recent_decks" class="row">
   <li ng-repeat="deck in recentDecks" class="col-xs-12 col-md-3">
     <card-anchor url="{{ deck.url }}" name="{{ deck.commander }}"></card-anchor>
-    <card-image name="{{ deck.commander }}"></card-image>
+    <card-image lazy="{{ true }}" name="{{ deck.commander }}"></card-image>
   </li>
 </ul>
