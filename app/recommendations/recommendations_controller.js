@@ -28,7 +28,6 @@ app.controller("RecommendationsController", function(
       });
 
       $("#moreRecommendations card-anchor").mouseenter(function() {
-        window.console.log("mouseenter");
         var img = $(this).next().find("img");
         img.attr("src", img.attr("lazy-src"));
       });
