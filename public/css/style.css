@@ -96,6 +96,10 @@ li {
   margin: 0;
 }
 
+#main .container {
+  padding-bottom: 20px;
+}
+
 #top {
   padding-top: 10px;
 }
