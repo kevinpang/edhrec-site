@@ -3,6 +3,7 @@ app.controller("RecommendationsController", function(
   $scope.loading = true;
   var query = $location.search().q;  
   var getRecommendationsPromise = null;
+  var commanderSearch = false;
   
   if (query.toLowerCase().indexOf("tappedout") > -1) {
     if (query.indexOf("http") < 0) {
@@ -11,12 +12,20 @@ app.controller("RecommendationsController", function(
     $scope.deckUrl = query;
     getRecommendationsPromise = recommendationService.getDeckRecommendations(query);
   } else {
+    commanderSearch = true;
     $scope.commander = query;
     getRecommendationsPromise = recommendationService.getCommanderRecommendations(query);
   }
   
   getRecommendationsPromise.then($.proxy(function(recommendations) {
     $scope.loading = false;
+    
+    // Use commander name returned by backend in case user didn't type in
+    // the full name of their commander
+    if (commanderSearch && recommendations.commander) {
+      $scope.commander = recommendations.commander;
+    }
+    
     $scope.recommendations = recommendations;
 
     // Don't run post processing until the next digest cycle so that the

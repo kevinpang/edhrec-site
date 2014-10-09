@@ -74,6 +74,7 @@ app.service("recommendationService", function($http, $q, eventService, settings)
   
   this.parseResponse_ = function(data) {
     var recommendations = {
+      commander: data.commander,
       top: [],
       creatures: [],
       artifacts: [],
