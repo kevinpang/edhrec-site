@@ -10,7 +10,7 @@ app.directive("recentDecks", function() {
         // sections have had a chance to render.
         $timeout(function() {
           $("#recent_decks card-anchor").mouseenter(function() {
-            var img = $(this).next().find("img");
+            var img = $(this).siblings("card-image").find("img");
             img.attr("src", img.attr("lazy-src"));
           });
         }, 1000);

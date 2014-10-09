@@ -57,10 +57,6 @@ a:hover {
   padding: 20px 0 0 0;
 }
 
-#recent_decks {
-  padding-bottom: 20px;
-}
-
 h3 {
   margin-bottom: 20px;
 }
@@ -133,16 +129,16 @@ li {
   display: block;
 }
 
-#moreRecommendations card-anchor + card-image,
-#recent_decks card-anchor + card-image {
+#moreRecommendations card-anchor ~ card-image,
+#recent_decks card-anchor ~ card-image {
   position: absolute;
   display: none;
   z-index: 99;
   margin-top: -295px;
 }
 
-#moreRecommendations card-anchor:hover + card-image,
-#recent_decks card-anchor:hover + card-image {
+#moreRecommendations card-anchor:hover ~ card-image,
+#recent_decks card-anchor:hover ~ card-image {
   display: inline;
   margin-left: 10px;
 }
@@ -167,4 +163,13 @@ li {
 
 #footer ul {
   margin-bottom: 0;
+}
+
+#recent_decks {
+  padding-bottom: 20px;
+}
+
+.reddit {
+  vertical-align: text-bottom;
+  height: 16px;
 }
