@@ -30,6 +30,7 @@ a:hover {
 #logo_container {
   height: 77px; /* Logo image height */
   min-width: 253px; /* Logo image width */
+  margin-bottom: 20px;
 }
 
 #header h1 {
@@ -46,18 +47,28 @@ a:hover {
 }
 
 #tag_line_container {
-  position: relative;
-  height: 79px; /* Logo image height + 2px to get text to line up right with logo text */
   margin-bottom: 20px;
+}
+
+@media (min-width: 1200px) {
+  #tag_line_container {
+    position: relative;
+    height: 79px; /* Logo image height + 2px to get text to line up right with logo text */ 
+  }
 }
 
 #tag_line {
   color: white;
-  position: absolute;
-  bottom: 0;
-  left: 15px;
   margin: 0;
   padding: 0;
+}
+
+@media (min-width: 1200px) {
+  #tag_line {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+  }
 }
 
 #main {
