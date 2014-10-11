@@ -24,7 +24,16 @@ a:hover {
 
 #header {
   background-color: #444;
-  padding: 0;
+  padding: 20px 0 0 0;
+}
+
+#logo_container {
+  height: 77px; /* Logo image height */
+  min-width: 253px; /* Logo image width */
+}
+
+#header h1 {
+  display: inline;
 }
 
 #header h1 a {
@@ -36,8 +45,19 @@ a:hover {
   color: white;
 }
 
-#header h3 {
+#tag_line_container {
+  position: relative;
+  height: 79px; /* Logo image height + 2px to get text to line up right with logo text */
+  margin-bottom: 20px;
+}
+
+#tag_line {
   color: white;
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  margin: 0;
+  padding: 0;
 }
 
 #main {
