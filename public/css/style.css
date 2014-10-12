@@ -97,21 +97,16 @@ h3 {
 }
 
 #query {
-  margin: 0 15px 20px 0;
-  padding: 10px 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
   width: 100%;
-}
-
-@media(min-width: 992px) {
-  #query {
-    width: 75%;
-  }
 }
 
 #search button {
   height: 44px;
   vertical-align: top;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .ui-autocomplete {
