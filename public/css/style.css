@@ -33,6 +33,10 @@ a:hover {
   margin-bottom: 20px;
 }
 
+#logo {
+  height: 77px;
+}
+
 #header h1 {
   display: inline;
 }
@@ -53,7 +57,7 @@ a:hover {
 @media (min-width: 1200px) {
   #tag_line_container {
     position: relative;
-    height: 79px; /* Logo image height + 2px to get text to line up right with logo text */ 
+    height: 81px; /* Logo image height + 4px to get text to line up right with logo text */ 
   }
 }
 
