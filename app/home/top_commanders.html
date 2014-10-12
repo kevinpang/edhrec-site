@@ -1,0 +1,15 @@
+<div ng-show="topCommanders">
+  <h4>Popular Commanders</h4>
+  <div id="top_commanders_filters">
+    <button ng-click="setMode('topMonth')" type="button"
+        class="btn btn-default {{ mode == 'topMonth' ? 'active' : '' }}">This month</button>
+    <button ng-click="setMode('topAllTime')" type="button"
+        class="btn btn-default {{ mode == 'topAllTime' ? 'active' : 'btn-default' }}">All time</button>
+  </div>
+  <ul ng-repeat="top in (mode == 'topMonth' ? topCommanders.topMonth : topCommanders.topAllTime)">
+    <li>
+      <card-anchor name="{{ top.name }}"></card-anchor>
+      <card-image name="{{ top.name }}" lazy="true"></card-image>
+    </li>
+  </ul>
+</div>

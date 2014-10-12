@@ -35,11 +35,6 @@ app.controller("RecommendationsController", function(
       moreRecommendations.masonry({
         itemSelector: "more-recommendations"
       });
-
-      $("#moreRecommendations card-anchor").mouseenter(function() {
-        var img = $(this).next().find("img");
-        img.attr("src", img.attr("lazy-src"));
-      });
     }, 1000);
   }, this)).catch(function(errorMessage) {
     $scope.loading = false;
