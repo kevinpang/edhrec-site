@@ -1,25 +1,24 @@
 var STATS_API_URL = "http://edhrec.com/stats";
 
 app.service("topCommandersService", function($http, $q) {
-  this.getTopCommanders = function(maxTopMonth, maxTopAllTime) {
+  this.getTopCommanders = function(max) {
     return $http.get(STATS_API_URL).then($.proxy(function(result) {
       var topCommanders = {
+        topWeek: [],
         topMonth: [],
         topAllTime: []
       };
 
-      for (var i = 0; i < maxTopMonth; i++) {
-        if (i >= result.data.topmonth.length) {
-          break;
+      for (var i = 0; i < max; i++) {
+        if (i < result.data.topweek.length) {
+          topCommanders.topWeek.push(this.parseTopCommander_(result.data.topweek[i]));
         }
-        topCommanders.topMonth.push(this.parseTopCommander_(result.data.topmonth[i]));
-      }
-      
-      for (var i = 0; i < maxTopAllTime; i++) {
-        if (i >= result.data.topalltime.length) {
-          break;
+        if (i < result.data.topmonth.length) {
+          topCommanders.topMonth.push(this.parseTopCommander_(result.data.topmonth[i]));
         }
-        topCommanders.topAllTime.push(this.parseTopCommander_(result.data.topalltime[i]));
+        if (i < result.data.topalltime.length) {
+          topCommanders.topAllTime.push(this.parseTopCommander_(result.data.topalltime[i]));
+        }
       }
       
       return topCommanders;
