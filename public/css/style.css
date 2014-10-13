@@ -216,3 +216,9 @@ li:last-child {
   height: 16px;
   margin-bottom: 2px;
 }
+
+.tapped-out {
+  vertical-align: text-bottom;
+  height: 15px;
+  margin-bottom: 2px;
+}
