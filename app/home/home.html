@@ -31,13 +31,12 @@
         Here are some example queries you can use to try out edhrec.
       </p>
       <ul>
-        <li>
-          <a ng-click="search(sampleCommander)">
-            {{ sampleCommander }}
-          </a>
+        <li class="hover-card">
+          <card-anchor name="{{ sampleCommander }}" url="#/recommendations?q={{ sampleCommander }}"></card-anchor>
+          <card-image name="{{ sampleCommander }}" lazy="true"></card-image>
         </li>
         <li>
-          <a ng-click="search(sampleDeckUrl)">
+          <a ng-href="#/recommendations?q={{ sampleDeckUrl }}">
             {{ sampleDeckUrl }}
           </a>
         </li>
