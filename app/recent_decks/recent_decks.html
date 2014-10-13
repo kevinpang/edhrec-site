@@ -1,7 +1,7 @@
 <ul id="recent_decks" class="row hover-card">
   <li ng-repeat="deck in recentDecks" class="col-xs-12 col-md-3">
     <card-anchor url="{{ deck.url }}" name="{{ deck.commander }}"></card-anchor>
-    <a href="{{ deck.reddit }}" title="View Reddit thread" ng-show="deck.reddit">
+    <a ng-href="{{ deck.reddit }}" title="View Reddit thread" ng-show="deck.reddit">
       <img src="public/img/reddit.png" class="reddit" alt="Reddit icon" />
     </a>
     <card-image lazy="{{ true }}" name="{{ deck.commander }}"></card-image>
