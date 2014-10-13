@@ -36,8 +36,9 @@ app.service("recommendationService", function($http, $q, eventService, settings)
         }, this), function(error) {
           var message = "Error generating recommendations.";
           if (error.status == 500) {
-            message += " Please verify your deck isn't marked as private "
-                + " and that your deck link is correct.";
+            message += " Please verify your deck isn't marked as private, " +
+                "your deck link looks like http://tappedout.net/mtg-decks/your-deck-name, " +
+                "and that the commander field is filled in on your deck.";
           }
           message += " Status code: " + error.status;
           return $q.reject(message);
