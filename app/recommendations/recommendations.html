@@ -19,7 +19,7 @@
       <card-anchor name="{{ top.card_info.name }}"></card-anchor>
     </li>
   </ul>
-  
+      
   <h4>More recommendations</h4>
   <div id="moreRecommendations" class="row hover-card">
     <div class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-9' : 'col-md-12' }}">
@@ -43,5 +43,30 @@
     <div class="col-xs-12 col-md-3" ng-show="recommendations.cuts.length > 0">
       <more-recommendations type="Unique to your deck" cards="recommendations.cuts"></more-recommendations>
     </div>
+  </div>
+
+  <div ng-show="recommendations.stats">
+    <h4>Stats for your deck</h4>
+    <div class="row">
+      <color-chart class="col-xs-12 col-md-4" style="height: 250px;" colors="recommendations.stats.colors"></color-chart>
+      <types-chart class="col-xs-12 col-md-4" style="height: 250px;" types="recommendations.stats.types"></types-chart>
+      <mana-curve-chart class="col-xs-12 col-md-4" style="height: 250px;" curve="recommendations.stats.curve"></mana-curve-chart>
+    </div>
+  </div>
+  
+  <div ng-show="recommendations.kstats">
+    <h4>Stats for decks like yours</h4>
+    <div class="row">
+      <color-chart class="col-xs-12 col-md-4" style="height: 250px;" colors="recommendations.kstats.colors"></color-chart>
+      <types-chart class="col-xs-12 col-md-4" style="height: 250px;" types="recommendations.kstats.types"></types-chart>
+      <mana-curve-chart class="col-xs-12 col-md-4" style="height: 250px;" curve="recommendations.kstats.curve"></mana-curve-chart>
+    </div>
+  </div>
+
+  <h4>Stats for decks with this commander</h4>
+  <div class="row">
+    <color-chart class="col-xs-12 col-md-4" style="height: 250px;" colors="recommendations.cstats.colors"></color-chart>
+    <types-chart class="col-xs-12 col-md-4" style="height: 250px;" types="recommendations.cstats.types"></types-chart>
+    <mana-curve-chart class="col-xs-12 col-md-4" style="height: 250px;" curve="recommendations.cstats.curve"></mana-curve-chart>
   </div>
 </div>

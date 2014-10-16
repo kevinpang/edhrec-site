@@ -75,7 +75,7 @@ app.service("recommendationService", function($http, $q, eventService, settings)
   
   this.parseResponse_ = function(data) {
     var recommendations = {
-      commander: data.commander,
+      commander: data.commander, // Only returned on commander searches
       top: [],
       creatures: [],
       artifacts: [],
@@ -84,7 +84,11 @@ app.service("recommendationService", function($http, $q, eventService, settings)
       sorceries: [],
       planeswalkers: [],
       lands: [],
-      cuts: data.cuts || []
+      cuts: data.cuts || [],
+      // API returns cstats in the stats field on commander searches
+      stats: data.commander ? null : data.stats,
+      kstats: data.kstats, // Only returned on deck searches
+      cstats: data.commander ? data.stats : data.cstats
     }
 
     for (var i = 0; i < data.recs.length; i++) {
