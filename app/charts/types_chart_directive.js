@@ -27,8 +27,13 @@ app.directive("typesChart", function() {
           fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           chartArea: {
             width: "90%",
-            height: "85%"
+            height: "85%",
+            left: 0
           },
+          titleTextStyle: {
+            fontSize: 14,
+            bold: false
+          }
         }
 
         var chart = new google.visualization.PieChart(elem[0]);

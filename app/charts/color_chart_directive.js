@@ -25,7 +25,12 @@ app.directive("colorChart", function() {
           backgroundColor: "#eee",
           chartArea: {
             width: "90%",
-            height: "85%"
+            height: "85%",
+            left: 0
+          },
+          titleTextStyle: {
+            fontSize: 14,
+            bold: false
           },
           fontSize: 12,
           fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",

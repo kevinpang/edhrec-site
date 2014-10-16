@@ -27,8 +27,13 @@ app.directive("manaCurveChart", function() {
           fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           chartArea: {
             width: "100%",
-            height: "80%"
+            height: "80%",
+            left: 0
           },
+          titleTextStyle: {
+            fontSize: 14,
+            bold: false
+          }
         };
 
         var manaCurveChart = new google.visualization.ColumnChart(elem[0]);
