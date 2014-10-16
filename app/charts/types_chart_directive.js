@@ -23,8 +23,10 @@ app.directive("typesChart", function() {
         var options = {
           title: "Card types",
           backgroundColor: "#eee",
+          fontSize: 14,
+          fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           chartArea: {
-            width: "100%",
+            width: "90%",
             height: "90%"
           },
         }

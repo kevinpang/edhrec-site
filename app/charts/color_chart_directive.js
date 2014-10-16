@@ -24,9 +24,11 @@ app.directive("colorChart", function() {
           title: "Card costs",
           backgroundColor: "#eee",
           chartArea: {
-            width: "100%",
+            width: "90%",
             height: "90%"
           },
+          fontSize: 14,
+          fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           slices: {
             0: { color: 'blue' },
             1: { color: 'black' },
