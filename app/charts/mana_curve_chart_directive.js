@@ -23,11 +23,11 @@ app.directive("manaCurveChart", function() {
           title: "Mana curve",
           backgroundColor: "#eee",
           legend: { position: "none" },
-          fontSize: 14,
+          fontSize: 12,
           fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           chartArea: {
             width: "100%",
-            height: "85%"
+            height: "80%"
           },
         };
 
