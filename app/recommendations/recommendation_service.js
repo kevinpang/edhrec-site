@@ -5,6 +5,7 @@ app.service("recommendationService", function($http, $q, eventService, config) {
   var API_REF = "kevin";
   var TAPPED_OUT_RECOMMENDATIONS_URL = config.BACKEND_URL + "/rec";
   var COMMANDER_RECOMMENDATIONS_URL = config.BACKEND_URL + "/cmdr";
+  var GENERATE_DECK_URL = config.BACKEND_URL + "/cmdrdeck";
 
   var searchTypes = {
     COMMANDER: "commander",
@@ -126,4 +127,24 @@ app.service("recommendationService", function($http, $q, eventService, config) {
     }
     return $.inArray(type, card.card_info.types) > -1;
   }
+  
+  this.generateDeck = function(commander) {
+    var url = GENERATE_DECK_URL + "?commander=" + commander;
+    var start = (new Date()).getTime();
+    
+    return $http.get(url).then($.proxy(function(result) {
+      var latency = (new Date()).getTime() - start;
+      eventService.recordGenerateDeckEvent(commander, result.status, latency);
+      
+      var deck = [];
+      for (var i = 0; i < result.data.cards.length; i++) {
+        deck.push(result.data.cards[i].card_info.name);
+      }
+      return deck.sort();
+    }, this), function(error) {
+      var latency = (new Date()).getTime() - start;
+      eventService.recordGenerateDeckEvent(commander, error.status, latency);
+      return $q.reject("Error generating deck. Status code: " + error.status);
+    });
+  };
 });

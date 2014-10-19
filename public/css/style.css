@@ -237,3 +237,17 @@ mana-curve-chart {
   height: 15px;
   margin-bottom: 2px;
 }
+
+#generatedDeck {
+  padding: 0;
+  margin-top: 10px;
+}
+
+#generatedDeck textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.ui-dialog {
+  padding: 5px;
+}
