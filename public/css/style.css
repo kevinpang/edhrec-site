@@ -185,6 +185,7 @@ color-chart,
 types-chart,
 mana-curve-chart {
   margin-bottom: 30px;
+  height: 250px;
 }
 
 .hover-card card-anchor ~ card-image {
