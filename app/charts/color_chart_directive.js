@@ -1,4 +1,4 @@
-app.directive("colorChart", function() {
+app.directive("colorChart", function($timeout) {
   return {
     restrict: "E",
     template: "<div></div>",
@@ -45,8 +45,10 @@ app.directive("colorChart", function() {
             4: { color: 'red' }}
         };
 
-        var chart = new google.visualization.PieChart(elem[0]);
-        chart.draw(data, options);
+        $timeout(function() {
+          var chart = new google.visualization.PieChart(elem[0]);
+          chart.draw(data, options);          
+        }, 1000);
       });
     }
   }

@@ -1,4 +1,4 @@
-app.directive("manaCurveChart", function() {
+app.directive("manaCurveChart", function($timeout) {
   return {
     restrict: "E",
     template: "<div></div>",
@@ -36,8 +36,10 @@ app.directive("manaCurveChart", function() {
           }
         };
 
-        var manaCurveChart = new google.visualization.ColumnChart(elem[0]);
-        manaCurveChart.draw(data, options);
+        $timeout(function() {
+          var chart = new google.visualization.ColumnChart(elem[0]);
+          chart.draw(data, options);
+        }, 1000);
       });
     }
   }
