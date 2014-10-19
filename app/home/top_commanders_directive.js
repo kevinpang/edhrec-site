@@ -1,10 +1,10 @@
-var MAX_TOP_COMMANDERS = 10;
-
 app.directive("topCommanders", function() {
   return {
     restrict: "E",
     templateUrl: "app/home/top_commanders.html",
     controller: function($scope, $timeout, topCommandersService) {
+      var MAX_TOP_COMMANDERS = 10;
+      
       $scope.mode = "topWeek";
       
       topCommandersService.getTopCommanders(MAX_TOP_COMMANDERS)

@@ -1,7 +1,7 @@
-var STATS_API_URL = "http://edhrec.com/stats";
-
-app.service("topCommandersService", function($http, $q) {
+app.service("topCommandersService", function($http, $q, config) {
   this.getTopCommanders = function(max) {
+    var STATS_API_URL = config.BACKEND_URL + "/stats";
+    
     return $http.get(STATS_API_URL).then($.proxy(function(result) {
       var topCommanders = {
         topWeek: [],

@@ -12,7 +12,5 @@ if (window.location.hostname.indexOf("staging.edhrec.com") > -1) {
 }
 
 config.BACKEND_URL = config.ENVIRONMENT == "PROD" ? "http://edhrec.com" : "http://staging.edhrec.com";
-config.TAPPED_OUT_RECOMMENDATIONS_URL = config.BACKEND_URL + "/rec";
-config.COMMANDER_RECOMMENDATIONS_URL = config.BACKEND_URL + "/cmdr";
 
 angular.module("config", []).constant("config", config);

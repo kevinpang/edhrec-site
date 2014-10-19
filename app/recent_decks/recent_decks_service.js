@@ -1,6 +1,6 @@
-var API_URL = "http://edhrec.com/recent";
-
-app.service("recentDecksService", function($http, $q) {
+app.service("recentDecksService", function($http, $q, config) {
+  var API_URL = config.BACKEND_URL + "/recent";
+  
   this.getRecentDecks = function(max) {
     return $http.get(API_URL).then(function(result) {
       var recentDecks = [];
