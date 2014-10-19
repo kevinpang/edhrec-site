@@ -11,7 +11,7 @@ app.service("eventService", function($window, config) {
   };
   
   this.recordEvent_ = function(category, action, label, value) {
-    if (config.environment() == "PROD") {
+    if (config.ENVIRONMENT == "PROD") {
       $window.ga("send", "event", category, action, label, value);      
     } else {
       $window.console.log("Skipped recording event. Category: " + category +

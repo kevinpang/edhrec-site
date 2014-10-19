@@ -1,8 +1,6 @@
 var MAX_TOP_RECS = 12;
 var MAX_CUTS = 15;
 var SAMPLE_DECK_RECOMMENDATIONS_URL = "public/sample_deck_recommendations.txt";
-var TAPPED_OUT_RECOMMENDATIONS_URL = "http://edhrec.com/rec";
-var COMMANDER_RECOMMENDATIONS_URL = "http://edhrec.com/cmdr";
 var API_REF = "kevin";
 
 var searchTypes = {
@@ -28,7 +26,7 @@ app.service("recommendationService", function($http, $q, eventService, config) {
     var sampleDeck = deckUrl == config.SAMPLE_DECK_URL;
     var searchType = sampleDeck ? searchTypes.SAMPLE_DECK : searchTypes.TAPPED_OUT;
     var url = sampleDeck ? SAMPLE_DECK_RECOMMENDATIONS_URL
-        : TAPPED_OUT_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
+        : config.TAPPED_OUT_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
         
     return this.getRecommendations_(deckUrl, searchType, url)
         .then($.proxy(function(data) {
@@ -48,7 +46,7 @@ app.service("recommendationService", function($http, $q, eventService, config) {
   this.getCommanderRecommendations = function(commander) {
     var sampleCommander = commander == config.SAMPLE_COMMANDER;
     var searchType = sampleCommander ? searchTypes.SAMPLE_COMMANDER : searchTypes.COMMANDER;
-    var url = COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
+    var url = config.COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
         
     return this.getRecommendations_(commander, searchType, url)
         .then($.proxy(function(data) {
