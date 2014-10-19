@@ -9,7 +9,7 @@ app.config(function($provide) {
   });
 });
 
-app.config(function ($routeProvider) {
+app.config(function($routeProvider) {
   $routeProvider
       .when("/", {
         controller: "HomeController",
