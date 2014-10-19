@@ -1,4 +1,4 @@
-app.service("eventService", function($window) {
+app.service("eventService", function($window, config) {
   this.recordSearchEvent = function(query, type, status, latency) {
     this.recordEvent_("search", type, status, latency);
     if (status != "200") {
@@ -11,7 +11,7 @@ app.service("eventService", function($window) {
   };
   
   this.recordEvent_ = function(category, action, label, value) {
-    if ($window.enableAnalytics) {
+    if (config.environment() == "PROD") {
       $window.ga("send", "event", category, action, label, value);      
     } else {
       $window.console.log("Skipped recording event. Category: " + category +

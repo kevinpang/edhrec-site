@@ -2,9 +2,9 @@ app.directive("searchBar", function() {
   return {
     restrict: "E",
     templateUrl: "app/search_bar/search_bar.html",
-    controller: function($scope, $location, $http, settings) {
-      $scope.sampleCommander = settings.SAMPLE_COMMANDER;
-      $scope.sampleDeckUrl = settings.SAMPLE_DECK_URL;
+    controller: function($scope, $location, $http, config) {
+      $scope.sampleCommander = config.SAMPLE_COMMANDER;
+      $scope.sampleDeckUrl = config.SAMPLE_DECK_URL;
       
       $scope.search = function() {
         var query = $("#query").val();

@@ -1,14 +1,15 @@
-angular.module('pageView', []).run(function($rootScope, $window, $location) {
-  $rootScope.$on('$viewContentLoaded', function() {
-    if ($window.enableAnalytics) {
-      $window.ga('send', 'pageview', { page: $location.path() });
-    } else {
-      $window.console.log("Skipped recording pageview. Location: " + $location.path());        
-    }
-  });
-})
+angular.module('pageView', ["config"])
+    .run(function($rootScope, $window, $location, config) {
+      $rootScope.$on('$viewContentLoaded', function() {
+        if (config.environment() == "PROD") {
+          $window.ga('send', 'pageview', { page: $location.path() });
+        } else {
+          $window.console.log("Skipped recording pageview. Location: " + $location.path());        
+        }
+      });
+    });
 
-var app = angular.module("app", ["ngRoute", "pageView"]);
+var app = angular.module("app", ["ngRoute", "pageView", "config"]);
 
 app.config(function($provide) {
   $provide.decorator("$exceptionHandler", function($delegate, eventService) {

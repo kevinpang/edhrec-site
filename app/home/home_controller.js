@@ -1,4 +1,4 @@
-app.controller("HomeController", function($scope, $location, settings) {
-  $scope.sampleCommander = settings.SAMPLE_COMMANDER;
-  $scope.sampleDeckUrl = settings.SAMPLE_DECK_URL;
+app.controller("HomeController", function($scope, $location, config) {
+  $scope.sampleCommander = config.SAMPLE_COMMANDER;
+  $scope.sampleDeckUrl = config.SAMPLE_DECK_URL;
 });

@@ -22,10 +22,10 @@ var cardTypes = {
   PLANESWALKER: "Planeswalker"
 };
 
-app.service("recommendationService", function($http, $q, eventService, settings) {    
+app.service("recommendationService", function($http, $q, eventService, config) {    
   this.getDeckRecommendations = function(deckUrl) {
     // Hardcoded response for sample deck to reduce load on backend
-    var sampleDeck = deckUrl == settings.SAMPLE_DECK_URL;
+    var sampleDeck = deckUrl == config.SAMPLE_DECK_URL;
     var searchType = sampleDeck ? searchTypes.SAMPLE_DECK : searchTypes.TAPPED_OUT;
     var url = sampleDeck ? SAMPLE_DECK_RECOMMENDATIONS_URL
         : TAPPED_OUT_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
@@ -46,7 +46,7 @@ app.service("recommendationService", function($http, $q, eventService, settings)
   };
 
   this.getCommanderRecommendations = function(commander) {
-    var sampleCommander = commander == settings.SAMPLE_COMMANDER;
+    var sampleCommander = commander == config.SAMPLE_COMMANDER;
     var searchType = sampleCommander ? searchTypes.SAMPLE_COMMANDER : searchTypes.COMMANDER;
     var url = COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
         
