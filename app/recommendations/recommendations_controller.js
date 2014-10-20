@@ -1,5 +1,5 @@
 app.controller("RecommendationsController", function(
-    $scope, $location, $timeout, recommendationService) {
+    $scope, $location, $timeout, edhrecService) {
   $scope.loading = true;
   var query = $location.search().q;  
   var getRecommendationsPromise = null;
@@ -10,11 +10,11 @@ app.controller("RecommendationsController", function(
       query = "http://" + query;
     }
     $scope.deckUrl = query;
-    getRecommendationsPromise = recommendationService.getDeckRecommendations(query);
+    getRecommendationsPromise = edhrecService.getDeckRecommendations(query);
   } else {
     commanderSearch = true;
     $scope.commander = query;
-    getRecommendationsPromise = recommendationService.getCommanderRecommendations(query);
+    getRecommendationsPromise = edhrecService.getCommanderRecommendations(query);
   }
   
   getRecommendationsPromise.then($.proxy(function(recommendations) {

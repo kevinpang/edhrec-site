@@ -1,4 +1,4 @@
-app.controller("DeckGeneratorController", function($scope, $location, $timeout, recommendationService) {
+app.controller("DeckGeneratorController", function($scope, $location, $timeout, edhrecService) {
   $scope.loading = true;
   
   $("#exportDialog").dialog({
@@ -11,7 +11,7 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
   
   var commander = $location.search().commander;
   
-  recommendationService.generateDeck(commander).then(function(deck) {
+  edhrecService.generateDeck(commander).then(function(deck) {
     $scope.loading = false;
     $scope.deck = deck;
     
