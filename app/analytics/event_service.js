@@ -10,8 +10,8 @@ app.service("eventService", function($window, config) {
     this.recordEvent_("exception", name, message, 1);
   };
   
-  this.recordGenerateDeckEvent = function(commander, status, latency) {
-    this.recordEvent_("generate_deck", commander, status, latency);
+  this.recordGenerateDeckEvent = function(status, latency) {
+    this.recordEvent_("generate_deck", status, null, latency);
   };
   
   this.recordEvent_ = function(category, action, label, value) {
