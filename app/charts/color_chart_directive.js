@@ -1,7 +1,7 @@
 app.directive("colorChart", function($timeout) {
   return {
     restrict: "E",
-    template: "<div></div>",
+    template: "Card costs<div></div>",
     scope: {
       colors: "="
     },
@@ -21,12 +21,10 @@ app.directive("colorChart", function($timeout) {
         }
 
         var options = {
-          title: "Card costs",
           backgroundColor: "#eee",
           chartArea: {
             width: "90%",
-            height: "85%",
-            left: 0
+            height: "90%"
           },
           titleTextStyle: {
             fontSize: 14,
@@ -46,7 +44,7 @@ app.directive("colorChart", function($timeout) {
         };
 
         $timeout(function() {
-          var chart = new google.visualization.PieChart(elem[0]);
+          var chart = new google.visualization.PieChart(elem.children("div")[0]);
           chart.draw(data, options);          
         }, 1000);
       });

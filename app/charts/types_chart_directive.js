@@ -1,7 +1,7 @@
 app.directive("typesChart", function($timeout) {
   return {
     restrict: "E",
-    template: "<div></div>",
+    template: "Card types<div></div>",
     scope: {
       types: "="
     },
@@ -21,14 +21,12 @@ app.directive("typesChart", function($timeout) {
         }
 
         var options = {
-          title: "Card types",
           backgroundColor: "#eee",
           fontSize: 12,
           fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           chartArea: {
             width: "90%",
-            height: "85%",
-            left: 0
+            height: "90%"
           },
           titleTextStyle: {
             fontSize: 14,
@@ -37,7 +35,7 @@ app.directive("typesChart", function($timeout) {
         }
 
         $timeout(function() {
-          var chart = new google.visualization.PieChart(elem[0]);
+          var chart = new google.visualization.PieChart(elem.children("div")[0]);
           chart.draw(data, options);
         }, 1000);
       });

@@ -1,7 +1,7 @@
 app.directive("manaCurveChart", function($timeout) {
   return {
     restrict: "E",
-    template: "<div></div>",
+    template: "Mana curve<div></div>",
     scope: {
       curve: "="
     },
@@ -20,15 +20,13 @@ app.directive("manaCurveChart", function($timeout) {
         }
 
         var options = {
-          title: "Mana curve",
           backgroundColor: "#eee",
           legend: { position: "none" },
           fontSize: 12,
           fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           chartArea: {
             width: "100%",
-            height: "80%",
-            left: 0
+            height: "90%"
           },
           titleTextStyle: {
             fontSize: 14,
@@ -37,7 +35,7 @@ app.directive("manaCurveChart", function($timeout) {
         };
 
         $timeout(function() {
-          var chart = new google.visualization.ColumnChart(elem[0]);
+          var chart = new google.visualization.ColumnChart(elem.children("div")[0]);
           chart.draw(data, options);
         }, 1000);
       });
