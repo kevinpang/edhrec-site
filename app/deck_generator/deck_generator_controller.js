@@ -27,6 +27,8 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
   });
     
   $scope.openExportDialog = function() {
+    $("#exportDialog textarea").text("");
+    
     for (var i = 0; i < $scope.deck.cardNames.length; i++) {
       $("#exportDialog textarea").append("1x " + $scope.deck.cardNames[i] + "\n");
     }
