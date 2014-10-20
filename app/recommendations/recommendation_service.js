@@ -152,8 +152,17 @@ app.service("recommendationService", function($http, $q, eventService, config) {
       var deck = this.createCollection_();
       deck.commander = result.data.commander;
       deck.stats = result.data.stats;
-      deck.cardNames = [];
+      deck.basics = result.data.basics;
       
+      for (var i = 0; i < deck.basics.length; i++) {
+        deck.lands.push({
+          card_info: {
+            name: deck.basics[i][0]
+          }
+        });
+      }
+      
+      deck.cardNames = [];
       for (var i = 0; i < result.data.cards.length; i++) {
         var card = result.data.cards[i];
         deck.cardNames.push(card.card_info.name);
