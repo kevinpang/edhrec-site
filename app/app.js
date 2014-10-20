@@ -19,5 +19,9 @@ app.config(function($routeProvider) {
         controller: "RecommendationsController",
         templateUrl: "app/recommendations/recommendations.html"
       })
+      .when("/deckGenerator", {
+        controller: "DeckGeneratorController",
+        templateUrl: "app/deck_generator/deck_generator.html"
+      })
       .otherwise({ redirectTo: "/" });
 });

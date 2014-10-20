@@ -1,15 +1,6 @@
 app.controller("RecommendationsController", function(
     $scope, $location, $timeout, recommendationService) {
   $scope.loading = true;
-  
-  $("#generatedDeck").dialog({
-    modal: true,
-    autoOpen: false,
-    title: "Generated example deck",
-    height: 400,
-    width: 300
-  });
-  
   var query = $location.search().q;  
   var getRecommendationsPromise = null;
   var commanderSearch = false;
@@ -51,26 +42,6 @@ app.controller("RecommendationsController", function(
   });
   
   $scope.generateDeck = function(commander) {
-    recommendationService.generateDeck(commander).then(function(deck) {
-      $("#generatedDeck textarea").text("");
-      for (var i = 0; i < deck.length; i++) {
-        $("#generatedDeck textarea").append("1x " + deck[i] + "\n");
-      }
-      resetCursor($("#generatedDeck textarea")[0]);
-      $("#generatedDeck").dialog("open");
-    }, function(errorMessage) {
-      alert(errorMessage);
-    });
+    $location.path("/deckGenerator").search({ "commander": commander });
   };
-  
-  var resetCursor = function(txtElement) { 
-      if (txtElement.setSelectionRange) { 
-          txtElement.focus(); 
-          txtElement.setSelectionRange(0, 0); 
-      } else if (txtElement.createTextRange) { 
-          var range = txtElement.createTextRange();  
-          range.moveStart('character', 0); 
-          range.select(); 
-      } 
-  }
 });

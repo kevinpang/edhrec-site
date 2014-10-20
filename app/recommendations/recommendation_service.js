@@ -75,22 +75,20 @@ app.service("recommendationService", function($http, $q, eventService, config) {
   }
   
   this.parseResponse_ = function(data) {
-    var recommendations = {
-      commander: data.commander, // Only returned on commander searches
-      top: [],
-      creatures: [],
-      artifacts: [],
-      enchantments: [],
-      instants: [],
-      sorceries: [],
-      planeswalkers: [],
-      lands: [],
-      cuts: data.cuts || [],
-      // API returns cstats in the stats field on commander searches
-      stats: data.commander ? null : data.stats,
-      kstats: data.kstats, // Only returned on deck searches
-      cstats: data.commander ? data.stats : data.cstats
+    var recommendations = this.createCollection_();
+    
+    recommendations.commander = data.commander; // Only returned on commander searches
+    recommendations.top = [];
+    if (data.cuts) {
+      recommendations.cuts = data.cuts.slice(0, MAX_CUTS);
+    } else {
+      recommendations.cuts = [];
     }
+
+    // API returns cstats in the stats field on commander searches
+    recommendations.stats = data.commander ? null : data.stats;
+    recommendations.kstats = data.kstats; // Only returned on deck searches
+    recommendations.cstats = data.commander ? data.stats : data.cstats;
 
     for (var i = 0; i < data.recs.length; i++) {
       var card = data.recs[i];
@@ -98,28 +96,43 @@ app.service("recommendationService", function($http, $q, eventService, config) {
       
       if (recommendations.top.length < MAX_TOP_RECS && !land) {
         recommendations.top.push(card);
-      } else {      
-        if (land) {
-          recommendations.lands.push(card);
-        } else if (this.isType_(card, cardTypes.CREATURE)) {
-          recommendations.creatures.push(card);
-        } else if (this.isType_(card, cardTypes.ARTIFACT)) {
-          recommendations.artifacts.push(card);
-        } else if (this.isType_(card, cardTypes.ENCHANTMENT)) {
-          recommendations.enchantments.push(card);
-        } else if (this.isType_(card, cardTypes.INSTANT)) {
-          recommendations.instants.push(card);
-        } else if (this.isType_(card, cardTypes.SORCERY)) {
-          recommendations.sorceries.push(card);
-        } else if (this.isType_(card, cardTypes.PLANESWALKER)) {
-          recommendations.planeswalkers.push(card);
-        }
+      } else {
+        this.addCard_(card, recommendations);
       }
     }
     
-    recommendations.cuts = recommendations.cuts.slice(0, MAX_CUTS);
     return recommendations;
   }
+  
+  this.createCollection_ = function() {
+    return {
+      creatures: [],
+      artifacts: [],
+      enchantments: [],
+      instants: [],
+      sorceries: [],
+      planeswalkers: [],
+      lands: []
+    };
+  }
+  
+  this.addCard_ = function(card, collection) {
+    if (this.isType_(card, cardTypes.LAND)) {
+      collection.lands.push(card);
+    } else if (this.isType_(card, cardTypes.CREATURE)) {
+      collection.creatures.push(card);
+    } else if (this.isType_(card, cardTypes.ARTIFACT)) {
+      collection.artifacts.push(card);
+    } else if (this.isType_(card, cardTypes.ENCHANTMENT)) {
+      collection.enchantments.push(card);
+    } else if (this.isType_(card, cardTypes.INSTANT)) {
+      collection.instants.push(card);
+    } else if (this.isType_(card, cardTypes.SORCERY)) {
+      collection.sorceries.push(card);
+    } else if (this.isType_(card, cardTypes.PLANESWALKER)) {
+      collection.planeswalkers.push(card);
+    }
+  };
   
   this.isType_ = function(card, type) {
     if (card == null || card.card_info == null) {
@@ -136,11 +149,19 @@ app.service("recommendationService", function($http, $q, eventService, config) {
       var latency = (new Date()).getTime() - start;
       eventService.recordGenerateDeckEvent(commander, result.status, latency);
       
-      var deck = [];
+      var deck = this.createCollection_();
+      deck.commander = result.data.commander;
+      deck.stats = result.data.stats;
+      deck.cardNames = [];
+      
       for (var i = 0; i < result.data.cards.length; i++) {
-        deck.push(result.data.cards[i].card_info.name);
+        var card = result.data.cards[i];
+        deck.cardNames.push(card.card_info.name);
+        this.addCard_(card, deck);
       }
-      return deck.sort();
+
+      deck.cardNames.sort();
+      return deck;
     }, this), function(error) {
       var latency = (new Date()).getTime() - start;
       eventService.recordGenerateDeckEvent(commander, error.status, latency);

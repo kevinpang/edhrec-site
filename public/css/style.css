@@ -173,7 +173,7 @@ li:last-child {
   margin-bottom: 30px;
 }
 
-#moreRecommendations .type {
+more-recommendations .type {
   border-bottom: 1px #aaa solid;
   padding-bottom: 10px;
   margin-top: 10px;
@@ -192,7 +192,7 @@ mana-curve-chart {
   position: absolute;
   display: none;
   z-index: 99;
-  margin-top: -295px;
+  margin-top: -147px;
 }
 
 .hover-card card-anchor:hover ~ card-image {
@@ -238,12 +238,12 @@ mana-curve-chart {
   margin-bottom: 2px;
 }
 
-#generatedDeck {
+#exportDialog {
   padding: 0;
   margin-top: 10px;
 }
 
-#generatedDeck textarea {
+#exportDialog textarea {
   width: 100%;
   height: 100%;
 }

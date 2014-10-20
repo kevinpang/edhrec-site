@@ -13,13 +13,20 @@
 <div id="recommendations" ng-show="recommendations">
   <h4 ng-show="deckUrl">Other decks like <a ng-href="{{ deckUrl }}">yours</a> use</h4>
   <div ng-show="commander">
-    <h4>
-      <span style="margin-bottom: 10px; margin-right: 10px; display: inline-block;">
-        Top recommendations for <card-anchor name="{{ commander }}"></card-anchor>
-      </span>
-      <button type="button" class="btn btn-default" ng-click="generateDeck(commander)">Generate Example Deck</button>
-    </h4>
+    <div class="row">
+      <div class="col-xs-12 col-md-9">
+        <h4 class="hover-card">
+          Top recommendations for 
+          <card-anchor name="{{ commander }}"></card-anchor>
+          <card-image name="{{ commander }}" lazy="true"></card-image>
+        </h4>
+      </div>
+      <div class="col-xs-12 col-md-3">
+        <button type="button" class="btn btn-default" ng-click="generateDeck(commander)">Build Me A Deck!</button>
+      </div>
+    </div>
   </div>
+  
   <ul id="top" class="row">
     <li ng-repeat="top in recommendations.top" class="col-xs-12 col-md-3">
       <card-image name="{{ top.card_info.name }}"></card-image>
@@ -30,7 +37,9 @@
   <h4>More recommendations</h4>
   <div id="moreRecommendations" class="row hover-card">
     <div class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-9' : 'col-md-12' }}">
-      <div id="adds" class="row js-masonry">
+      <div id="adds" class="row">
+        <more-recommendations type="Lands" cards="recommendations.lands"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
         <more-recommendations type="Creatures" cards="recommendations.creatures"
             class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
         <more-recommendations type="Artifacts" cards="recommendations.artifacts"
@@ -42,8 +51,6 @@
         <more-recommendations type="Sorceries" cards="recommendations.sorceries"
             class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
         <more-recommendations type="Planeswalkers" cards="recommendations.planeswalkers"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
-        <more-recommendations type="Lands" cards="recommendations.lands"
             class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
       </div>
     </div>
@@ -75,9 +82,5 @@
     <color-chart class="col-xs-12 col-md-4" colors="recommendations.cstats.colors"></color-chart>
     <types-chart class="col-xs-12 col-md-4" types="recommendations.cstats.types"></types-chart>
     <mana-curve-chart class="col-xs-12 col-md-4" curve="recommendations.cstats.curve"></mana-curve-chart>
-  </div>
-  
-  <div id="generatedDeck">
-    <textarea></textarea>
   </div>
 </div>

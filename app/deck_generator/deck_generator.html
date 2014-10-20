@@ -1,0 +1,47 @@
+<div ng-show="error">
+  <h4>Error</h4>
+  {{ error }}
+</div>
+
+<div id="loading" ng-show="loading">
+  <h4>Building deck...</h4>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped active"></div>
+  </div>
+</div>
+
+<div ng-show="deck">
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+      <h4 class="hover-card">
+        Generated decklist for
+        <card-anchor name="{{ deck.commander }}" url="#/recommendations?q={{ deck.commander }}"></card-anchor>
+        <card-image name="{{ deck.commander }}" lazy="true"></card-image>
+      </h4>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <button type="button" class="btn btn-default" ng-click="openExportDialog()">Export Decklist</button>
+    </div>
+  </div>
+
+  <div id="generatedDeck" class="row hover-card"> 
+    <more-recommendations type="Lands" cards="deck.lands" class="col-xs-12 col-md-3"></more-recommendations>
+    <more-recommendations type="Creatures" cards="deck.creatures" class="col-xs-12 col-md-3"></more-recommendations>
+    <more-recommendations type="Artifacts" cards="deck.artifacts" class="col-xs-12 col-md-3"></more-recommendations>
+    <more-recommendations type="Enchantments" cards="deck.enchantments" class="col-xs-12 col-md-3"></more-recommendations>
+    <more-recommendations type="Instants" cards="deck.instants" class="col-xs-12 col-md-3"></more-recommendations>
+    <more-recommendations type="Sorceries" cards="deck.sorceries" class="col-xs-12 col-md-3"></more-recommendations>
+    <more-recommendations type="Planeswalkers" cards="deck.planeswalkers" class="col-xs-12 col-md-3"></more-recommendations>
+  </div>
+  
+  <h4>Stats for this deck</h4>
+  <div class="row">
+    <color-chart class="col-xs-12 col-md-4" colors="deck.stats.colors"></color-chart>
+    <types-chart class="col-xs-12 col-md-4" types="deck.stats.types"></types-chart>
+    <mana-curve-chart class="col-xs-12 col-md-4" curve="deck.stats.curve"></mana-curve-chart>
+  </div>
+</div>
+
+<div id="exportDialog">
+  <textarea></textarea>
+</div>
