@@ -77,13 +77,13 @@ a:hover {
 
 #main {
   /* Height of footer */
-  padding: 20px 0 370px 0;
+  padding: 20px 0 250px 0;
   background-color: #eee;
 }
 
 #footer {
   width: 100%;
-  height: 370px;
+  height: 250px;
   background-color: #ddd;
   position: absolute;
   bottom: 0;
@@ -193,6 +193,10 @@ mana-curve-chart {
   display: none;
   z-index: 99;
   margin-top: -147px;
+}
+
+#footer .hover-card card-anchor ~ card-image {
+  margin-top: -295px;
 }
 
 .hover-card card-anchor:hover ~ card-image {
