@@ -154,19 +154,19 @@ app.service("recommendationService", function($http, $q, eventService, config) {
       deck.stats = result.data.stats;
       deck.basics = result.data.basics;
       
+      deck.cardNames = [];
+      for (var i = 0; i < result.data.cards.length; i++) {
+        var card = result.data.cards[i];
+        deck.cardNames.push(card.card_info.name);
+        this.addCard_(card, deck);
+      }
+      
       for (var i = 0; i < deck.basics.length; i++) {
         deck.lands.push({
           card_info: {
             name: deck.basics[i][0]
           }
         });
-      }
-      
-      deck.cardNames = [];
-      for (var i = 0; i < result.data.cards.length; i++) {
-        var card = result.data.cards[i];
-        deck.cardNames.push(card.card_info.name);
-        this.addCard_(card, deck);
       }
 
       deck.cardNames.sort();
