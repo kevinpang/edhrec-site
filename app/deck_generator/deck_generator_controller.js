@@ -6,7 +6,11 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
     autoOpen: false,
     title: "Decklist",
     height: 400,
-    width: 300
+    width: 300,
+    open: function() {
+      resetCursor($("#exportDialog textarea")[0]);
+      $("#exportDialog textarea").scrollTop(0);
+    }
   });
   
   var commander = $location.search().commander;
@@ -36,7 +40,6 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
       $("#exportDialog textarea").append($scope.deck.basics[i][1] + "x " + $scope.deck.basics[i][0] + "\n");
     }
     
-    resetCursor($("#exportDialog textarea")[0]);
     $("#exportDialog").dialog("open");
   };
   
