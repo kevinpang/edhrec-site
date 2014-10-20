@@ -77,13 +77,13 @@ a:hover {
 
 #main {
   /* Height of footer */
-  padding: 20px 0 250px 0;
+  padding: 20px 0 370px 0;
   background-color: #eee;
 }
 
 #footer {
   width: 100%;
-  height: 250px;
+  height: 370px;
   background-color: #ddd;
   position: absolute;
   bottom: 0;
