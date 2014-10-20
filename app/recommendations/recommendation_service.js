@@ -147,7 +147,7 @@ app.service("recommendationService", function($http, $q, eventService, config) {
     
     return $http.get(url).then($.proxy(function(result) {
       var latency = (new Date()).getTime() - start;
-      eventService.recordGenerateDeckEvent(commander, result.status, latency);
+      eventService.recordGenerateDeckEvent(result.status, latency);
       
       var deck = this.createCollection_();
       deck.commander = result.data.commander;
