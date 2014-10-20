@@ -33,7 +33,7 @@ app.controller("RecommendationsController", function(
     $timeout(function() {
       var moreRecommendations = $("#moreRecommendations #adds");
       moreRecommendations.masonry({
-        itemSelector: "more-recommendations"
+        itemSelector: "card-list"
       });
     }, 1000);
   }, this)).catch(function(errorMessage) {

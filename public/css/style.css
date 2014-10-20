@@ -173,7 +173,7 @@ li:last-child {
   margin-bottom: 30px;
 }
 
-more-recommendations .type {
+card-list .type {
   border-bottom: 1px #aaa solid;
   padding-bottom: 10px;
   margin-top: 10px;

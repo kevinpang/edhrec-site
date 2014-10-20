@@ -38,24 +38,24 @@
   <div id="moreRecommendations" class="row hover-card">
     <div class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-9' : 'col-md-12' }}">
       <div id="adds" class="row">
-        <more-recommendations type="Lands" cards="recommendations.lands"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
-        <more-recommendations type="Creatures" cards="recommendations.creatures"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
-        <more-recommendations type="Artifacts" cards="recommendations.artifacts"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
-        <more-recommendations type="Enchantments" cards="recommendations.enchantments"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
-        <more-recommendations type="Instants" cards="recommendations.instants"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
-        <more-recommendations type="Sorceries" cards="recommendations.sorceries"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
-        <more-recommendations type="Planeswalkers" cards="recommendations.planeswalkers"
-            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></more-recommendations>
+        <card-list type="Lands" cards="recommendations.lands"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></card-list>
+        <card-list type="Creatures" cards="recommendations.creatures"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></card-list>
+        <card-list type="Artifacts" cards="recommendations.artifacts"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></card-list>
+        <card-list type="Enchantments" cards="recommendations.enchantments"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></card-list>
+        <card-list type="Instants" cards="recommendations.instants"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></card-list>
+        <card-list type="Sorceries" cards="recommendations.sorceries"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></card-list>
+        <card-list type="Planeswalkers" cards="recommendations.planeswalkers"
+            class="col-xs-12 {{ recommendations.cuts.length > 0 ? 'col-md-4' : 'col-md-3' }}"></card-list>
       </div>
     </div>
     <div class="col-xs-12 col-md-3" ng-show="recommendations.cuts.length > 0">
-      <more-recommendations type="Unique to your deck" cards="recommendations.cuts"></more-recommendations>
+      <card-list type="Unique to your deck" cards="recommendations.cuts"></card-list>
     </div>
   </div>
 

@@ -19,7 +19,7 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
     // sections have had a chance to render.
     $timeout(function() {
       $("#generatedDeck").masonry({
-        itemSelector: "more-recommendations"
+        itemSelector: "card-list"
       });
     }, 1000);
   }, function(errorMessage) {
