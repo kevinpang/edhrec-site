@@ -4,7 +4,7 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
   $("#exportDialog").dialog({
     modal: true,
     autoOpen: false,
-    title: "Export Decklist",
+    title: "Decklist",
     height: 400,
     width: 300
   });
