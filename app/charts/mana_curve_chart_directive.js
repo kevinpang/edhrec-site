@@ -26,7 +26,7 @@ app.directive("manaCurveChart", function($timeout) {
           fontName: "'Helvetica Neue', Helvetica, Arial, sans-serif;",
           chartArea: {
             width: "100%",
-            height: "90%"
+            height: "80%"
           },
           titleTextStyle: {
             fontSize: 14,
