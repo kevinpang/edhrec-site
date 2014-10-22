@@ -11,6 +11,7 @@ app.service("edhrecService", function($http, $q, eventService, config) {
   var searchTypes = {
     COMMANDER: "commander",
     SAMPLE_COMMANDER: "sample_commander",
+    RANDOM_COMMANDER: "random_commander",
     SAMPLE_DECK: "sample_deck",
     TAPPED_OUT: "tapped_out"
   };
@@ -48,9 +49,14 @@ app.service("edhrecService", function($http, $q, eventService, config) {
   };
 
   this.getCommanderRecommendations = function(commander) {
-    var sampleCommander = commander == config.SAMPLE_COMMANDER;
-    var searchType = sampleCommander ? searchTypes.SAMPLE_COMMANDER : searchTypes.COMMANDER;
+    var searchType = searchTypes.COMMANDER;
     var url = COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
+    if (commander == config.SAMPLE_COMMANDER) {
+      searchType = searchTypes.SAMPLE_COMMANDER;
+    } else if (commander == config.RANDOM_COMMANDER_QUERY) {
+      searchType = searchTypes.RANDOM_COMMANDER;
+      var url = RANDOM_COMMANDER_URL;
+    }
         
     return this.getRecommendations_(commander, searchType, url)
         .then($.proxy(function(recommendations) {
@@ -180,13 +186,5 @@ app.service("edhrecService", function($http, $q, eventService, config) {
       return false;
     }
     return $.inArray(type, card.card_info.types) > -1;
-  };
-  
-  this.getRandomCommander = function() {
-    return $http.get(RANDOM_COMMANDER_URL).then(function(result) {
-      return result.data.commander;
-    }, function(error) {
-      return $q.reject("Error getting random commander. Status code: " + error.status);
-    });
   };
 });
