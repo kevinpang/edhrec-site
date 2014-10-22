@@ -102,16 +102,10 @@ h3 {
   width: 100%;
 }
 
-@media (min-width: 992px) {
-  #query {
-    width: 70%;
-    margin-right: 5px;
-  }
-}
-
 #searchButtons {
   display: inline-block;
   vertical-align: top;
+  min-width: 270px;
 }
 
 #search button {

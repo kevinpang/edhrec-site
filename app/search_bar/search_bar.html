@@ -1,8 +1,12 @@
-<form id="search" ng-submit="search()">
-  <input id="query" type="text"
-      placeholder="Commander or TappedOut deck link (e.g. {{ sampleCommander}}, {{ sampleDeckUrl }})" />
-  <div id="searchButtons">
-    <button id="search_button" class="btn btn-primary">Get Recommendations!</button>
-    <button ng-click="random()" class="btn btn-default">Random</button>
+<form id="search" ng-submit="search()" class="row">
+  <div class="col-xs-12 col-md-9">
+    <input id="query" type="text"
+        placeholder="Commander or TappedOut deck link (e.g. {{ sampleCommander}}, {{ sampleDeckUrl }})" />
+  </div>
+  <div class="col-xs-12 col-md-3">
+    <div id="searchButtons">
+      <button id="search_button" class="btn btn-primary">Get Recommendations!</button>
+      <button ng-click="random()" class="btn btn-default">Random</button>
+    </div>
   </div>
 </form>
