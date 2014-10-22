@@ -6,6 +6,7 @@ app.service("edhrecService", function($http, $q, eventService, config) {
   var TAPPED_OUT_RECOMMENDATIONS_URL = config.BACKEND_URL + "/rec";
   var COMMANDER_RECOMMENDATIONS_URL = config.BACKEND_URL + "/cmdr";
   var GENERATE_DECK_URL = config.BACKEND_URL + "/cmdrdeck";
+  var RANDOM_COMMANDER_URL = config.BACKEND_URL + "/randomcmdr";
 
   var searchTypes = {
     COMMANDER: "commander",
@@ -179,5 +180,13 @@ app.service("edhrecService", function($http, $q, eventService, config) {
       return false;
     }
     return $.inArray(type, card.card_info.types) > -1;
-  }
+  };
+  
+  this.getRandomCommander = function() {
+    return $http.get(RANDOM_COMMANDER_URL).then(function(result) {
+      return result.data.commander;
+    }, function(error) {
+      return $q.reject("Error getting random commander. Status code: " + error.status);
+    });
+  };
 });

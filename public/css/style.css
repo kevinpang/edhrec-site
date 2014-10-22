@@ -102,10 +102,22 @@ h3 {
   width: 100%;
 }
 
+@media (min-width: 992px) {
+  #query {
+    width: 70%;
+    margin-right: 5px;
+  }
+}
+
+#searchButtons {
+  display: inline-block;
+  vertical-align: top;
+}
+
 #search button {
   height: 44px;
   vertical-align: top;
-  margin-bottom: 20px;
+  margin: 0 5px 20px 0;
 }
 
 .ui-autocomplete {
