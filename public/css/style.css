@@ -170,7 +170,8 @@ li:last-child {
   display: block !important;
 }
 
-#moreRecommendations {
+#moreRecommendations,
+#generatedDeck {
   margin-bottom: 30px;
 }
 
