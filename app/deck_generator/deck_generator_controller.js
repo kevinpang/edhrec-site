@@ -27,6 +27,7 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
       });
     }, 1000);
   }, function(errorMessage) {
+    $scope.loading = false;
     $scope.error = errorMessage;
   });
     
