@@ -49,6 +49,15 @@ app.service("edhrecService", function($http, $q, eventService, config) {
   };
 
   this.getCommanderRecommendations = function(commander) {
+    // If user has been redirected from clicking the "Random" button, then use
+    // the cached recommendations.
+    if (this.lastRandomResult_ && this.lastRandomResult_.commander == commander) {
+      var deferred = $q.defer();
+      deferred.resolve(this.parseRecommendationsResponse_(this.lastRandomResult_));
+      this.lastRandomResult_ = null;
+      return deferred.promise;
+    }
+    
     var searchType = commander == config.SAMPLE_COMMANDER ? searchTypes.SAMPLE_COMMANDER : searchTypes.COMMANDER;
     var url = COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
         
@@ -190,6 +199,7 @@ app.service("edhrecService", function($http, $q, eventService, config) {
       var latency = (new Date()).getTime() - start;
       eventService.recordSearchEvent(
           null, searchTypes.RANDOM_COMMANDER, result.status, latency);
+      this.lastRandomResult_ = result.data;
       return result.data.commander;
     }, this), function(error) {
       var latency = (new Date()).getTime() - start;
