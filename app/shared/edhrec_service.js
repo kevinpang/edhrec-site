@@ -49,14 +49,8 @@ app.service("edhrecService", function($http, $q, eventService, config) {
   };
 
   this.getCommanderRecommendations = function(commander) {
-    var searchType = searchTypes.COMMANDER;
+    var searchType = commander == config.SAMPLE_COMMANDER ? searchTypes.SAMPLE_COMMANDER : searchTypes.COMMANDER;
     var url = COMMANDER_RECOMMENDATIONS_URL + "?commander=" + commander;
-    if (commander == config.SAMPLE_COMMANDER) {
-      searchType = searchTypes.SAMPLE_COMMANDER;
-    } else if (commander == config.RANDOM_COMMANDER_QUERY) {
-      searchType = searchTypes.RANDOM_COMMANDER;
-      var url = RANDOM_COMMANDER_URL;
-    }
         
     return this.getRecommendations_(commander, searchType, url)
         .then($.proxy(function(recommendations) {
@@ -186,5 +180,22 @@ app.service("edhrecService", function($http, $q, eventService, config) {
       return false;
     }
     return $.inArray(type, card.card_info.types) > -1;
+  };
+  
+  this.getRandomCommander = function() {
+    var url = RANDOM_COMMANDER_URL;
+    var start = (new Date()).getTime();
+    
+    return $http.get(url).then($.proxy(function(result) {
+      var latency = (new Date()).getTime() - start;
+      eventService.recordSearchEvent(
+          null, searchTypes.RANDOM_COMMANDER, result.status, latency);
+      return result.data.commander;
+    }, this), function(error) {
+      var latency = (new Date()).getTime() - start;
+      eventService.recordSearchEvent(
+          null, searchTypes.RANDOM_COMMANDER, result.status, latency);
+      return $q.reject("Error generating random commander. Status code: " + error.status);
+    });
   };
 });
