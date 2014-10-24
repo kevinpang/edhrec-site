@@ -1,7 +1,7 @@
 app.service("cardService", function() {
   this.getCardUrl = function(name) {
     name = this.sanitizeName_(name);
-    return "http://gatherer.wizards.com/Pages/Card/Details.aspx?name=" + name;
+    return "http://magic.tcgplayer.com/db/magic_single_card.asp?cn=" + name;
   };
   
   this.getCardImage = function(name) {
