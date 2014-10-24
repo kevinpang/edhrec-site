@@ -1,7 +1,6 @@
 app.service("edhrecService", function($http, $q, eventService, config) {
   var MAX_TOP_RECS = 12;
   var MAX_CUTS = 15;
-  var SAMPLE_DECK_RECOMMENDATIONS_URL = "public/sample_deck_recommendations.txt";
   var API_REF = "kevin";
   var TAPPED_OUT_RECOMMENDATIONS_URL = config.BACKEND_URL + "/rec";
   var COMMANDER_RECOMMENDATIONS_URL = config.BACKEND_URL + "/cmdr";
@@ -27,11 +26,9 @@ app.service("edhrecService", function($http, $q, eventService, config) {
   };
   
   this.getDeckRecommendations = function(deckUrl) {
-    // Hardcoded response for sample deck to reduce load on backend
     var sampleDeck = deckUrl == config.SAMPLE_DECK_URL;
     var searchType = sampleDeck ? searchTypes.SAMPLE_DECK : searchTypes.TAPPED_OUT;
-    var url = sampleDeck ? SAMPLE_DECK_RECOMMENDATIONS_URL
-        : TAPPED_OUT_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
+    var url = TAPPED_OUT_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
         
     return this.getRecommendations_(deckUrl, searchType, url)
         .then($.proxy(function(recommendations) {
@@ -88,6 +85,7 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     var recommendations = this.createCollection_();
     
     recommendations.commander = data.commander; // Only returned on commander searches
+    recommendations.price = 0;
     recommendations.top = [];
     if (data.cuts) {
       recommendations.cuts = data.cuts.slice(0, MAX_CUTS);
@@ -108,6 +106,11 @@ app.service("edhrecService", function($http, $q, eventService, config) {
         recommendations.top.push(card);
       } else {
         this.addCard_(card, recommendations);
+      }
+      
+      if (card.card_info.price) {
+        // Use average card price to determine deck price.
+        recommendations.price += card.card_info.price[1];
       }
     }
     
@@ -134,11 +137,16 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     deck.commander = data.commander;
     deck.stats = data.stats;
     deck.basics = data.basics;
+    deck.price = 0;
     
     deck.cardNames = [];
     for (var i = 0; i < data.cards.length; i++) {
       var card = data.cards[i];
       deck.cardNames.push(card.card_info.name);
+      if (card.card_info.price) {
+        // Use average card price to determine deck price.
+        deck.price += card.card_info.price[1];
+      }
       this.addCard_(card, deck);
     }
     

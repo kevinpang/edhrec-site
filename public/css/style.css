@@ -108,7 +108,8 @@ h3 {
   width: 100%;
 }
 
-#searchButtons {
+#searchButtons,
+.title-buttons {
   display: inline-block;
   vertical-align: top;
   min-width: 270px;
