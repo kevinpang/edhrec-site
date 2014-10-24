@@ -86,6 +86,7 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     
     recommendations.commander = data.commander; // Only returned on commander searches
     recommendations.price = 0;
+    recommendations.cards = [];
     recommendations.top = [];
     if (data.cuts) {
       recommendations.cuts = data.cuts.slice(0, MAX_CUTS);
@@ -100,8 +101,12 @@ app.service("edhrecService", function($http, $q, eventService, config) {
 
     for (var i = 0; i < data.recs.length; i++) {
       var card = data.recs[i];
-      var land = this.isType_(card, cardTypes.LAND);
+      recommendations.cards.push({
+        name: card.card_info.name,
+        count: 1
+      });
       
+      var land = this.isType_(card, cardTypes.LAND);  
       if (recommendations.top.length < MAX_TOP_RECS && !land) {
         recommendations.top.push(card);
       } else {
@@ -138,11 +143,17 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     deck.stats = data.stats;
     deck.basics = data.basics;
     deck.price = 0;
+    deck.cards = [{
+      name: data.commander,
+      count: 1
+    }];
     
-    deck.cardNames = [];
     for (var i = 0; i < data.cards.length; i++) {
       var card = data.cards[i];
-      deck.cardNames.push(card.card_info.name);
+      deck.cards.push({
+        name: card.card_info.name,
+        count: 1
+      });
       if (card.card_info.price) {
         // Use average card price to determine deck price.
         deck.price += card.card_info.price[1];
@@ -151,6 +162,11 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     }
     
     for (var i = 0; i < deck.basics.length; i++) {
+      deck.cards.push({
+        name: deck.basics[i][0],
+        count: deck.basics[i][1]
+      });
+      
       deck.lands.push({
         card_info: {
           name: deck.basics[i][0]
@@ -158,8 +174,18 @@ app.service("edhrecService", function($http, $q, eventService, config) {
       });
     }
 
-    deck.cardNames.sort();
+    deck.cards.sort(this.cardsCompareFunction_);
     return deck;
+  };
+  
+  this.cardsCompareFunction_ = function(a, b) {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
   };
   
   this.createCollection_ = function() {

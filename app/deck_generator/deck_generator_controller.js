@@ -1,4 +1,5 @@
-app.controller("DeckGeneratorController", function($scope, $location, $timeout, edhrecService) {
+app.controller("DeckGeneratorController", function(
+    $scope, $location, $timeout, $window, edhrecService, tcgplayerService) {
   $scope.loading = true;
   
   $("#exportDialog").dialog({
@@ -31,14 +32,12 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
     $scope.error = errorMessage;
   });
     
-  $scope.openExportDialog = function() {
+  $scope.openExportDialog = function(deck) {
     $("#exportDialog textarea").text("");
     
-    for (var i = 0; i < $scope.deck.cardNames.length; i++) {
-      $("#exportDialog textarea").append("1x " + $scope.deck.cardNames[i] + "\n");
-    }
-    for (var i = 0; i < $scope.deck.basics.length; i++) {
-      $("#exportDialog textarea").append($scope.deck.basics[i][1] + "x " + $scope.deck.basics[i][0] + "\n");
+    for (var i = 0; i < deck.cards.length; i++) {
+      var exportCard = deck.cards[i];
+      $("#exportDialog textarea").append(exportCard.count + " " + exportCard.name + "\n");
     }
     
     $("#exportDialog").dialog("open");
@@ -54,4 +53,8 @@ app.controller("DeckGeneratorController", function($scope, $location, $timeout, 
       range.select();
     } 
   };
+  
+  $scope.openMassProductEntry = function(cards) {
+    $window.open(tcgplayerService.getMassProductEntryUrl(cards));
+  }
 });

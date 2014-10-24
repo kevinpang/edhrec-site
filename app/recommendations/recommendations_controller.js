@@ -1,5 +1,5 @@
 app.controller("RecommendationsController", function(
-    $scope, $location, $timeout, edhrecService) {
+    $scope, $location, $timeout, $window, edhrecService, tcgplayerService) {
   $scope.loading = true;
   var query = $location.search().q;  
   var getRecommendationsPromise = null;
@@ -44,4 +44,8 @@ app.controller("RecommendationsController", function(
   $scope.generateDeck = function(commander) {
     $location.path("/deckGenerator").search({ "commander": commander });
   };
+  
+  $scope.openMassProductEntry = function(cards) {
+    $window.open(tcgplayerService.getMassProductEntryUrl(cards));
+  }
 });
