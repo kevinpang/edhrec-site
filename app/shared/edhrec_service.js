@@ -6,6 +6,7 @@ app.service("edhrecService", function($http, $q, analyticsService, config) {
   var COMMANDER_RECOMMENDATIONS_URL = config.BACKEND_URL + "/cmdr";
   var GENERATE_DECK_URL = config.BACKEND_URL + "/cmdrdeck";
   var RANDOM_COMMANDER_URL = config.BACKEND_URL + "/randomcmdr";
+  var RECENT_DECKS_URL = config.BACKEND_URL + "/recent";
 
   var searchTypes = {
     COMMANDER: "commander",
@@ -231,4 +232,21 @@ app.service("edhrecService", function($http, $q, analyticsService, config) {
       return $q.reject("Error generating random commander. Status code: " + error.status);
     });
   };
+  
+  this.getRecentDecks = function(max) {
+    return $http.get(RECENT_DECKS_URL).then(function(result) {
+      var recentDecks = [];
+      
+      for (var i = 0; i < max; i++) {
+        if (i >= result.data.length) {
+          break;
+        }        
+        recentDecks.push(JSON.parse(result.data[i]));
+      }
+      
+      return recentDecks;
+    }, function(error) {
+      return $q.reject(error);
+    });
+  }
 });
