@@ -2,12 +2,7 @@
   {{ error }}
 </div>
 
-<div id="loading" ng-show="loading">
-  <h4>Generating deck...</h4>
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped active"></div>
-  </div>
-</div>
+<loading-bar ng-show="loading" text="Generating deck..."></loading-bar>
 
 <div ng-show="deck">
   <div class="row header-with-button">
