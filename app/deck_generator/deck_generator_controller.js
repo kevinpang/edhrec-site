@@ -1,5 +1,5 @@
 app.controller("DeckGeneratorController", function(
-    $scope, $location, $timeout, $window, edhrecService, tcgplayerService) {
+    $scope, $location, $timeout, $window, edhrecService) {
   $scope.loading = true;
   
   $("#exportDialog").dialog({
@@ -53,8 +53,4 @@ app.controller("DeckGeneratorController", function(
       range.select();
     } 
   };
-  
-  $scope.openMassProductEntry = function(cards) {
-    $window.open(tcgplayerService.getMassProductEntryUrl(cards));
-  }
 });

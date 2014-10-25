@@ -85,7 +85,6 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     var recommendations = this.createCollection_();
     
     recommendations.commander = data.commander; // Only returned on commander searches
-    recommendations.price = 0;
     recommendations.cards = [];
     recommendations.top = [];
     if (data.cuts) {
@@ -112,11 +111,6 @@ app.service("edhrecService", function($http, $q, eventService, config) {
       } else {
         this.addCard_(card, recommendations);
       }
-      
-      if (card.card_info.price) {
-        // Use average card price to determine deck price.
-        recommendations.price += card.card_info.price[1];
-      }
     }
     
     return recommendations;
@@ -142,7 +136,6 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     deck.commander = data.commander;
     deck.stats = data.stats;
     deck.basics = data.basics;
-    deck.price = 0;
     deck.cards = [{
       name: data.commander,
       count: 1
@@ -154,10 +147,6 @@ app.service("edhrecService", function($http, $q, eventService, config) {
         name: card.card_info.name,
         count: 1
       });
-      if (card.card_info.price) {
-        // Use average card price to determine deck price.
-        deck.price += card.card_info.price[1];
-      }
       this.addCard_(card, deck);
     }
     
