@@ -19,7 +19,7 @@
       </h4>
     </div>
     <div class="col-xs-12 col-md-3">
-      <button type="button" class="btn btn-default" ng-click="openExportDialog(deck)">Export Decklist</button>
+      <export-button cards="deck.cards"></export-button>
     </div>
   </div>
 
@@ -39,8 +39,4 @@
     <types-chart class="col-xs-12 col-md-4" types="deck.stats.types"></types-chart>
     <mana-curve-chart class="col-xs-12 col-md-4" curve="deck.stats.curve"></mana-curve-chart>
   </div>
-</div>
-
-<div id="exportDialog">
-  <textarea></textarea>
 </div>
