@@ -1,4 +1,4 @@
-app.service("eventService", function($window, config) {
+app.service("analyticsService", function($window, config) {
   this.recordSearchEvent = function(query, type, status, latency) {
     this.recordEvent_("search", type, status, latency);
     if (status != "200") {

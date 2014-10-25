@@ -1,4 +1,4 @@
-app.service("edhrecService", function($http, $q, eventService, config) {
+app.service("edhrecService", function($http, $q, analyticsService, config) {
   var MAX_TOP_RECS = 12;
   var MAX_CUTS = 15;
   var API_REF = "kevin";
@@ -72,11 +72,11 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     
     return $http.get(url).then($.proxy(function(result) {
       var latency = (new Date()).getTime() - start;
-      eventService.recordSearchEvent(query, searchType, result.status, latency);
+      analyticsService.recordSearchEvent(query, searchType, result.status, latency);
       return this.parseRecommendationsResponse_(result.data);
     }, this), function(error) {
       var latency = (new Date()).getTime() - start;
-      eventService.recordSearchEvent(query, searchType, error.status, latency);
+      analyticsService.recordSearchEvent(query, searchType, error.status, latency);
       return $q.reject(error);
     });
   }
@@ -122,11 +122,11 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     
     return $http.get(url).then($.proxy(function(result) {
       var latency = (new Date()).getTime() - start;
-      eventService.recordGenerateDeckEvent(result.status, latency);
+      analyticsService.recordGenerateDeckEvent(result.status, latency);
       return this.parseGenerateDeckResponse_(result.data);
     }, this), function(error) {
       var latency = (new Date()).getTime() - start;
-      eventService.recordGenerateDeckEvent(commander, error.status, latency);
+      analyticsService.recordGenerateDeckEvent(commander, error.status, latency);
       return $q.reject("Error generating deck. Status code: " + error.status);
     });
   };
@@ -220,13 +220,13 @@ app.service("edhrecService", function($http, $q, eventService, config) {
     
     return $http.get(url).then($.proxy(function(result) {
       var latency = (new Date()).getTime() - start;
-      eventService.recordSearchEvent(
+      analyticsService.recordSearchEvent(
           null, searchTypes.RANDOM_COMMANDER, result.status, latency);
       this.lastRandomResult_ = result.data;
       return result.data.commander;
     }, this), function(error) {
       var latency = (new Date()).getTime() - start;
-      eventService.recordSearchEvent(
+      analyticsService.recordSearchEvent(
           null, searchTypes.RANDOM_COMMANDER, result.status, latency);
       return $q.reject("Error generating random commander. Status code: " + error.status);
     });

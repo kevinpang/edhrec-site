@@ -1,10 +1,10 @@
 var app = angular.module("app", ["ngRoute", "pageView", "config"]);
 
 app.config(function($provide) {
-  $provide.decorator("$exceptionHandler", function($delegate, eventService) {
+  $provide.decorator("$exceptionHandler", function($delegate, analyticsService) {
     return function(exception, cause) {
       $delegate(exception, cause);
-      eventService.recordException(exception.name, exception.message);
+      analyticsService.recordException(exception.name, exception.message);
     };
   });
 });
