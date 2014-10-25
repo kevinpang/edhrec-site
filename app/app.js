@@ -23,5 +23,9 @@ app.config(function($routeProvider) {
         controller: "DeckGeneratorController",
         templateUrl: "app/deck_generator/deck_generator.html"
       })
+      .when("/random", {
+        controller: "RandomController",
+        templateUrl: "app/random/random.html"
+      })
       .otherwise({ redirectTo: "/" });
 });

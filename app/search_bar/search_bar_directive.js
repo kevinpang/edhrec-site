@@ -2,7 +2,7 @@ app.directive("searchBar", function() {
   return {
     restrict: "E",
     templateUrl: "app/search_bar/search_bar.html",
-    controller: function($scope, $location, $http, $route, config, edhrecService) {
+    controller: function($scope, $location, $http, $route, config) {
       $scope.sampleCommander = config.SAMPLE_COMMANDER;
       $scope.sampleDeckUrl = config.SAMPLE_DECK_URL;
       
@@ -24,10 +24,8 @@ app.directive("searchBar", function() {
       });
       
       $scope.random = function() {
-        edhrecService.getRandomCommander().then(function(commander) {
-          $("#query").val("");
-          $location.path("/recommendations").search({ "q": commander });
-        });
+        $("#query").val("");
+        $location.path("/random");
       };
       
       $("#query").focus();
