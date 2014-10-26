@@ -29,3 +29,11 @@ app.config(function($routeProvider) {
       })
       .otherwise({ redirectTo: "/" });
 });
+
+app.config(function($compileProvider, config) {
+  if (config.ENVIRONMENT == "PROD") {
+    $compileProvider.debugInfoEnabled(false);
+  } else {
+    window.console.log("debugInfoEnabled");
+  }
+});
