@@ -11,7 +11,7 @@ app.service("analyticsService", function($window, config) {
   };
   
   this.recordGenerateDeckEvent = function(status, latency) {
-    this.recordEvent_("generate_deck", status, null, latency);
+    this.recordEvent_("generate_deck", status, "", latency);
   };
   
   this.recordEvent_ = function(category, action, label, value) {
