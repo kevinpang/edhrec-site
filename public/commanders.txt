@@ -81,6 +81,7 @@ Crovax, Ascendant Hero
 Crovax the Cursed
 Dakkon Blackblade
 Damia, Sage of Stone
+Daretti, Scrap Savant
 Darien, King of Kjeldor
 Darigaaz, the Igniter
 Daughter of Autumn
@@ -111,7 +112,9 @@ Ertai, Wizard Adept
 Exava, Rakdos Blood Witch
 Experiment Kraj
 Ezuri, Renegade Leader
+Feldon of the Third Path
 Frankie Peanuts
+Freyalise, Llanowar's Fury
 Fumiko the Lowblood
 Gabriel Angelfire
 Gaddock Teeg
@@ -124,6 +127,7 @@ Gerrard Capashen
 Geth, Lord of the Vault
 Ghave, Guru of Spores
 Ghost Council of Orzhova
+Ghoulcaller Gisa
 Gisela, Blade of Goldnight
 Glissa Sunseeker
 Glissa, the Traitor
@@ -189,6 +193,7 @@ Jaraku the Interloper
 Jareth, Leonine Titan
 Jasmine Boreal
 Jaya Ballard, Task Mage
+Jazal Goldmane
 Jedit Ojanen
 Jedit Ojanen of Efrava
 Jeleva, Nephalia's Scourge
@@ -321,6 +326,7 @@ Myojin of Life's Web
 Myojin of Night's Reach
 Myojin of Seeing Winds
 Nagao, Bound by Honor
+Nahiri, the Lithomancer
 Narset, Enlightened Master
 Nath of the Gilt-Leaf
 Nebuchadnezzar
@@ -335,6 +341,7 @@ Niv-Mizzet, the Firemind
 Norin the Wary
 Numot, the Devastator
 Nylea, God of the Hunt
+Ob Nixilis of the Black Oath
 Ob Nixilis, the Fallen
 Ob Nixilis, Unshackled
 Obzedat, Ghost Council
@@ -457,6 +464,7 @@ Squee, Goblin Nabob
 Stabwhisker the Odious
 Stangg
 Starke of Rath
+Stitcher Geralf
 Stonebrow, Krosan Hero
 Sunastian Falconer
 Sun Ce, Young Conquerer
@@ -474,6 +482,7 @@ Taniwha
 Tariel, Reckoner of Souls
 Tarox Bladewing
 Teferi, Mage of Zhalfir
+Teferi, Temporal Archmage
 Telim'Tor
 Teneb, the Harvester
 Tetsuo Umezawa
@@ -491,6 +500,7 @@ Thriss, Nantuko Primus
 Thromok the Insatiable
 Thrun, the Last Troll
 Tibor and Lumia
+Titania, Protector of Argoth
 Tivadar of Thorn
 Tobias Andrion
 Tobita, Master of Winds
