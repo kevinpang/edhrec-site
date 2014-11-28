@@ -1,8 +1,9 @@
 <ul id="recent_decks" class="row hover-card">
   <li ng-repeat="deck in recentDecks" class="col-xs-12 col-md-3">
     <card-anchor url="#/recommendations?q={{ deck.url }}" name="{{ deck.commander }}"></card-anchor>
-    <a ng-href="{{ deck.url }}" title="View deck on TappedOut">
-      <img src="public/img/tapped_out.png" class="tapped-out" alt="TappedOut icon" />
+    <a ng-href="{{ deck.url }}" title="View deck">
+      <img ng-src="{{ 'public/img/' + (deck.url.indexOf('tappedout') > -1 ? 'tapped_out.png' : 'mtg_salvation.png') }}"
+          class="tapped-out" />
     </a>
     <a ng-href="{{ deck.reddit }}" title="View Reddit thread" ng-show="deck.reddit">
       <img src="public/img/reddit.png" class="reddit" alt="Reddit icon" />

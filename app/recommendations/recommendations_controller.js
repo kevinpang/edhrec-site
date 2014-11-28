@@ -1,11 +1,12 @@
 app.controller("RecommendationsController", function(
     $scope, $location, $timeout, $window, edhrecService) {
   $scope.loading = true;
-  var query = $location.search().q;  
+  var query = $location.search().q;
+  var queryLowerCase = query.toLowerCase();
   var getRecommendationsPromise = null;
   var commanderSearch = false;
   
-  if (query.toLowerCase().indexOf("tappedout") > -1) {
+  if (queryLowerCase.indexOf("tappedout") > -1 || queryLowerCase.indexOf("mtgsalvation") > -1) {
     if (query.indexOf("http") < 0) {
       query = "http://" + query;
     }

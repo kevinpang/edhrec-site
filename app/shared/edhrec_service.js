@@ -2,7 +2,7 @@ app.service("edhrecService", function($http, $q, analyticsService, config) {
   var MAX_TOP_RECS = 12;
   var MAX_CUTS = 15;
   var API_REF = "kevin";
-  var TAPPED_OUT_RECOMMENDATIONS_URL = config.BACKEND_URL + "/rec";
+  var DECK_RECOMMENDATIONS_URL = config.BACKEND_URL + "/rec";
   var COMMANDER_RECOMMENDATIONS_URL = config.BACKEND_URL + "/cmdr";
   var GENERATE_DECK_URL = config.BACKEND_URL + "/cmdrdeck";
   var RANDOM_COMMANDER_URL = config.BACKEND_URL + "/randomcmdr";
@@ -13,7 +13,9 @@ app.service("edhrecService", function($http, $q, analyticsService, config) {
     SAMPLE_COMMANDER: "sample_commander",
     RANDOM_COMMANDER: "random_commander",
     SAMPLE_DECK: "sample_deck",
-    TAPPED_OUT: "tapped_out"
+    TAPPED_OUT: "tapped_out",
+    MTG_SALVATION: "mtg_salvation",
+    UNKNOWN: "unknown"
   };
 
   var cardTypes = {
@@ -27,16 +29,24 @@ app.service("edhrecService", function($http, $q, analyticsService, config) {
   };
   
   this.getDeckRecommendations = function(deckUrl) {
-    var sampleDeck = deckUrl == config.SAMPLE_DECK_URL;
-    var searchType = sampleDeck ? searchTypes.SAMPLE_DECK : searchTypes.TAPPED_OUT;
-    var url = TAPPED_OUT_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
+    var sampleDeck = deckUrl == config.SAMPLE_TAPPED_OUT_DECK_URL ||
+        deckUrl == config.SAMPLE_MTG_SALVATION_FORUM_URL;
+    var searchType = searchTypes.UNKNOWN;
+    if (sampleDeck) {
+      searchType = searchTypes.SAMPLE_DECK;
+    } else if (deckUrl.toLowerCase().indexOf("tappedout") > -1) {
+      searchType = searchTypes.TAPPED_OUT;
+    } else if (deckUrl.toLowerCase().indexOf("mtgsalvation") > -1) {
+      searchType = searchTypes.MTG_SALVATION;
+    }
+    var url = DECK_RECOMMENDATIONS_URL + "?to=" + deckUrl + "&ref=" + API_REF;
         
     return this.getRecommendations_(deckUrl, searchType, url)
         .then($.proxy(function(recommendations) {
           return recommendations;
         }, this), function(error) {
           var message = "Error generating recommendations.";
-          if (error.status == 500) {
+          if (error.status == 500 && searchType == searchTypes.TAPPED_OUT) {
             message += " Please verify your deck isn't marked as private, " +
                 "your deck link looks like http://tappedout.net/mtg-decks/your-deck-name, " +
                 "and that the commander field is filled in on your deck.";

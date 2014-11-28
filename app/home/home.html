@@ -12,8 +12,8 @@
     <div class="faq">
       <h4>How do I use it?</h4>
       <p>
-        Enter in a commander or a <a href="http://tappedout.net">TappedOut</a> deck link
-        and click the "Get Recommendations!" button.
+        Enter in a commander name, <a href="http://tappedout.net">TappedOut</a> deck link, or
+        <a href="http://mtgsalvation.com">MTG Salvation</a> forum link and click the "Get Recommendations!" button.
       </p>
     </div>
     
@@ -28,8 +28,13 @@
           <card-image name="{{ sampleCommander }}" lazy="true"></card-image>
         </li>
         <li>
-          <a ng-href="#/recommendations?q={{ sampleDeckUrl }}">
-            {{ sampleDeckUrl }}
+          <a ng-href="#/recommendations?q={{ sampleTappedOutDeckUrl }}">
+            {{ sampleTappedOutDeckUrl }}
+          </a>
+        </li>
+        <li>
+          <a ng-href="#/recommendations?q={{ sampleMtgSalvationForumUrl }}">
+            {{ sampleMtgSalvationForumUrl }}
           </a>
         </li>
       </ul>
